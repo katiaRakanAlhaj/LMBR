@@ -20,16 +20,41 @@ const Navbar = () => {
     { icon: <BiLogoFacebook /> },
     { icon: <FaYoutube /> },
   ];
+
   const aboutItems = [
     { title: i18next.t("about_us") },
     { title: i18next.t("vision_and_mission") },
     { title: i18next.t("goals") }
   ];
+
   const comanyItems = [
     { title: i18next.t("future_meeting_company") },
     { title: i18next.t("Al-Rafidain Construction Company") },
     { title: i18next.t("Golden Sieves Company") }
-  ]
+  ];
+
+  // Services data with three columns
+  const servicesData = [
+    [
+      { title: i18next.t("service_1") },
+      { title: i18next.t("service_2") },
+      { title: i18next.t("service_3") },
+      { title: i18next.t("service_4") },
+    ],
+    [
+      { title: i18next.t("service_5") },
+      { title: i18next.t("service_6") },
+      { title: i18next.t("service_7") },
+      { title: i18next.t("service_8") },
+    ],
+    [
+      { title: i18next.t("service_9") },
+      { title: i18next.t("service_10") },
+      { title: i18next.t("service_11") },
+      { title: i18next.t("service_12") },
+    ]
+  ];
+
   useEffect(() => {
     const storedLanguage = localStorage.getItem("language") || "ar";
     setLanguage(storedLanguage);
@@ -111,7 +136,7 @@ const Navbar = () => {
               </div>
 
               {/* Companies Dropdown Menu */}
-               {isCompaniesDropdownOpen && (
+              {isCompaniesDropdownOpen && (
                 <div style={{
                   background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(0deg, rgba(231, 121, 45, 0.5), rgba(231, 121, 45, 0.5))'
                 }}
@@ -128,7 +153,7 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Services with Dropdown */}
+            {/* Services with Full Width Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setIsServicesDropdownOpen(true)}
@@ -139,19 +164,7 @@ const Navbar = () => {
                 <icon className="text-white"><MdArrowBackIos /> </icon>
               </div>
 
-              {/* Services Dropdown Menu */}
-              {isServicesDropdownOpen && (
-                <div
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[16.125rem] h-[10rem] bg-black z-20"
-                  style={{ width: '258px' }}
-                >
-                  <div className="p-4 text-white">
-                    <p className="hover:bg-gray-800 p-2 rounded cursor-pointer">Service 1</p>
-                    <p className="hover:bg-gray-800 p-2 rounded cursor-pointer">Service 2</p>
-                    <p className="hover:bg-gray-800 p-2 rounded cursor-pointer">Service 3</p>
-                  </div>
-                </div>
-              )}
+
             </div>
 
             <p className="text-white text-[1.1rem]">{i18next.t("certificates")}</p>
@@ -160,7 +173,34 @@ const Navbar = () => {
             <p className="text-white text-[1.1rem]">{i18next.t("contact_us")}</p>
           </div>
         </div>
+        {/* Full Width Services Dropdown with 3 Columns */}
+        {isServicesDropdownOpen && (
+          <div
+            style={{
+              background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(0deg, rgba(231, 121, 45, 0.5), rgba(231, 121, 45, 0.5))'
+            }}
+            className="absolute top-full left-[2rem] right-[2rem] -mt-1 flex justify-center py-6 z-20"
+          >
+            <div className="w-full px-[4rem]">
+              <div className="grid grid-cols-3 gap-8">
+                {servicesData.map((column, columnIndex) => (
+                  <div key={columnIndex} className="space-y-4">
+                    {column.map((service, serviceIndex) => (
+                      <div
+                        key={serviceIndex}
+                        className="text-white text-[1.1rem] hover:text-gray-300 cursor-pointer transition-colors duration-200 flex items-center justify-center"
+                      >
+                        {service.title}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
     </div>
   );
 };
