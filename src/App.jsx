@@ -13,6 +13,7 @@ import { MyContext } from "./component/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import i18next from "i18next";
 import Wrapper from './component/wrapper/wrapper';
+import Home from "./pages/Home";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,6 +52,7 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route path="/" element={<Wrapper />}>
+         <Route path="/" element={<Home />} />
         </Route>
       </Route>
     )
