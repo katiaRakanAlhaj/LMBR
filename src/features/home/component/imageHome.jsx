@@ -56,7 +56,7 @@ const ImageHome = () => {
                                     <div className="absolute inset-0 bg-black/40 transition-opacity duration-500 group-hover:opacity-100 opacity-0"></div>
 
                                     {/* Description Container */}
-                                    <div className="relative z-10 transform translate-y-full group-hover:translate-y-0 transition-all duration-700 ease-out delay-100">
+                                    <div className="relative z-10 transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-out delay-100">
                                         <div className="p-8 rounded-lg max-w-2xl mx-4">
                                             <p className="text-[#E7792D] font-bold text-[2rem] text-center leading-relaxed">
                                                 {item.title}

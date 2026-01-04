@@ -1,6 +1,8 @@
 // components/DropdownMenu.jsx
 import { MdArrowBackIos } from "react-icons/md";
 import { useState, useRef, useEffect } from "react";
+import i18next from "i18next";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const DropdownMenu = ({
   isOpen,
@@ -105,11 +107,19 @@ const DropdownMenu = ({
         onMouseEnter={handleTriggerMouseEnter}
         onMouseLeave={handleTriggerMouseLeave}
       >
-        <p className="text-white text-[1.1rem]">{title}</p>
-        <MdArrowBackIos
+        <p className="text-white text-[1.1rem] text-nowrap">{title}</p>
+       {i18next.language == "ar"?(
+         <MdArrowBackIos
           className={`text-white text-[0.9rem] transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : 'rotate-0'
             }`}
-        />      </div>
+        />
+       ):(
+         <MdArrowForwardIos 
+          className={`text-white text-[0.9rem] transition-transform duration-300 ${isMenuOpen ? '-rotate-90' : 'rotate-0'
+            }`}
+        />
+       )}
+      </div>
 
       {/* Dropdown */}
       {isMenuOpen && (

@@ -3,7 +3,7 @@ import i18n from "../../i18n";
 import { MyContext } from "../store";
 import logo from "../../assets/images/logo.png";
 import i18next from "i18next";
-import { MdArrowBackIos } from "react-icons/md";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import DropdownMenu from "./dropdownMenu";
 import ServicesMenu from "./servicesMenu";
 import SocialIcons from "./socialIcons";
@@ -109,7 +109,7 @@ const Navbar = () => {
         <SocialIcons />
 
         {/* Language Switcher */}
-        <div className="absolute bottom-[0.6rem] left-[3.5rem] flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50">
+        <div className={`absolute bottom-[0.6rem] ${i18next.language == "ar" ? 'left-[3.5rem]' : 'right-[3.5rem]'} flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50`}>
           <span
             className={`${language === "en" ? "font-bold text-[#263F57]" : ""}`}
             onClick={() => handleChange("en")}
@@ -158,10 +158,17 @@ const Navbar = () => {
             >
               <div className="flex gap-x-2 items-center cursor-pointer">
                 <p className="text-white text-[1.1rem]">{i18next.t("services")}</p>
-                <MdArrowBackIos
-                  className={`text-white text-[0.9rem] transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-90" : "rotate-0"
-                    }`}
-                />
+                {i18next.language == "ar" ? (
+                  <MdArrowBackIos
+                    className={`text-white text-[0.9rem] transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-90" : "rotate-0"
+                      }`}
+                  />
+                ) : (
+                  <MdArrowForwardIos
+                    className={`text-white text-[0.9rem] transition-transform duration-300 ${isServicesDropdownOpen ? "-rotate-90" : "rotate-0"
+                      }`}
+                  />
+                )}
               </div>
             </div>
 

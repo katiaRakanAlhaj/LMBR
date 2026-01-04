@@ -1,6 +1,6 @@
 const NavLink = ({ title }) => {
   return (
-    <p className="text-white text-[1.1rem] cursor-pointer">
+    <p className="text-white text-nowrap text-[1.1rem] cursor-pointer">
       {title}
     </p>
   );
