@@ -14,6 +14,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import i18next from "i18next";
 import Wrapper from './component/wrapper/wrapper';
 import Home from "./pages/Home";
+import VissionAndMission from "./pages/about/vission_mission";
+import AboutUs from "./pages/about/about_us";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,7 +54,10 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route path="/" element={<Wrapper />}>
-         <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/vission" element={<VissionAndMission />} />
+          <Route path="/about" element={<AboutUs />} />
+
         </Route>
       </Route>
     )
@@ -61,7 +66,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div
-     
+
         dir={i18n.language === "ar" ? "rtl" : "ltr"}
       >
         <MyContext.Provider value={{ language, setLanguage }}>

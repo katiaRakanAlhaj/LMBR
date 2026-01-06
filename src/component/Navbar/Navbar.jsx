@@ -19,9 +19,9 @@ const Navbar = () => {
   const servicesMenuRef = useRef(null);
 
   const aboutItems = [
-    { title: i18next.t("about_us") },
-    { title: i18next.t("vision_and_mission") },
-    { title: i18next.t("goals") },
+    { title: i18next.t("about_us") , path :'/about' },
+    { title: i18next.t("vision_and_mission")  , path:'/vission'},
+    { title: i18next.t("goals") , path:'/goals'},
   ];
 
   const companyItems = [

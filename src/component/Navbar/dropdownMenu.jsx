@@ -3,6 +3,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useState, useRef, useEffect } from "react";
 import i18next from "i18next";
 import { MdArrowForwardIos } from "react-icons/md";
+import { NavLink as RouterLink } from "react-router-dom";
 
 const DropdownMenu = ({
   isOpen,
@@ -145,17 +146,17 @@ const DropdownMenu = ({
                       opacity: activeIndex === index ? 1 : 0
                     }}
                   />
+<RouterLink
+  to={item.path}
+  className="relative z-10 flex flex-col items-center text-white text-[1.1rem] py-3 transition-colors duration-200"
+  onMouseEnter={() => handleItemMouseEnter(index)}
+  onMouseLeave={handleItemMouseLeave}
+>
+  <p className={`transition-colors duration-200 ${activeIndex === index ? 'text-white font-medium' : ''}`}>
+    {item.title}
+  </p>
+</RouterLink>
 
-                  {/* Item content */}
-                  <div
-                    className="relative z-10 flex flex-col items-center text-white text-[1.1rem] py-3 cursor-pointer transition-colors duration-200"
-                    onMouseEnter={() => handleItemMouseEnter(index)}
-                    onMouseLeave={handleItemMouseLeave}
-                  >
-                    <p className={`transition-colors duration-200 ${activeIndex === index ? 'text-white font-medium' : ''}`}>
-                      {item.title}
-                    </p>
-                  </div>
 
                   {/* Divider */}
                   {index < items.length - 1 && (

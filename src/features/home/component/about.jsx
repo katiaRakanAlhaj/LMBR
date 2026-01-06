@@ -3,6 +3,7 @@ import about from "../../../assets/images/about.jpg";
 import Title from "../../../component/ui/title";
 import { GoArrowUpLeft, GoArrowUpRight } from "react-icons/go";
 import i18next from "i18next";
+import Button from "../../../component/ui/buuton";
 
 const About = () => {
     const sectionRef = useRef(null);
@@ -77,46 +78,7 @@ const About = () => {
                         لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواءلوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواءلوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على
                     </p>
 
-                    <button
-                        className="
-    group
-    w-[10rem] h-[3rem]
-    bg-primary
-    mt-[0.8rem]
-    flex items-center justify-center gap-x-2
-    transition-colors duration-300
-    hover:bg-secondary
-  "
-                    >
-                        <p className="text-white">
-                            {i18next.t("see_more")}
-                        </p>
-
-                        {i18next.language == "ar" ? (
-                            <span
-                                className="
-      text-white text-[1.2rem]
-      transform
-      transition-transform duration-300
-      group-hover:-rotate-45
-    "
-                            >
-                                <GoArrowUpLeft />
-                            </span>
-                        ) : (
-                            <span
-                                className="
-      text-white text-[1.2rem]
-      transform
-      transition-transform duration-300
-      group-hover:rotate-45
-    "
-                            >
-                                <GoArrowUpRight />
-                            </span>
-                        )}
-                    </button>
-
+                   <Button title={i18next.t("see_more")}/>
                 </div>
 
                 {/* Second Column */}

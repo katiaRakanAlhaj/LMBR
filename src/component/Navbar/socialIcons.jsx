@@ -2,7 +2,7 @@
 import { BiLogoFacebook } from "react-icons/bi";
 import { FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 
-const SocialIcons = () => {
+const SocialIcons = ({ spacing = "1.5rem" }) => {
   const social = [
     { icon: <FaLinkedinIn />, link: "#" },
     { icon: <FaInstagram />, link: "#" },
@@ -12,7 +12,7 @@ const SocialIcons = () => {
   ];
 
   return (
-    <div className="flex gap-x-[1.5rem]">
+    <div className="flex" style={{ gap: spacing }}>
       {social.map((s, index) => (
         <a 
           key={index}
