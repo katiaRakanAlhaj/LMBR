@@ -19,9 +19,9 @@ const Navbar = () => {
   const servicesMenuRef = useRef(null);
 
   const aboutItems = [
-    { title: i18next.t("about_us") , path :'/about' },
-    { title: i18next.t("vision_and_mission")  , path:'/vission'},
-    { title: i18next.t("goals") , path:'/goals'},
+    { title: i18next.t("about_us"), path: '/about' },
+    { title: i18next.t("vision_and_mission"), path: '/vission' },
+    { title: i18next.t("goals"), path: '/goals' },
   ];
 
   const companyItems = [
@@ -172,14 +172,13 @@ const Navbar = () => {
               </div>
             </div>
 
-            <NavLink title={i18next.t("certificates")} />
+            <NavLink title={i18next.t("certificates")} path="/certificates" />
             <NavLink title={i18next.t("company_equipment")} />
-            <NavLink title={i18next.t("health_and_safety")} />
-            <NavLink title={i18next.t("contact_us")} />
+            <NavLink title={i18next.t("health_and_safety")} path = "/health_and_safety"/>
+            <NavLink title={i18next.t("contact_us")} path = "/contact"/>
           </div>
         </div>
       </div>
-
       {/* Services Dropdown */}
       {isServicesDropdownOpen && (
         <div

@@ -10,7 +10,6 @@ const Banner = ({ image, title }) => {
             backgroundRepeat: "no-repeat",
           }}
         />
-
         {/* Gradient Overlay */}
         <div
           className="absolute inset-0"

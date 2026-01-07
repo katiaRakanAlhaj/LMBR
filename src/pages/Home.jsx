@@ -12,7 +12,7 @@ const Home = () => {
       <Services />
       <Projects />
       <Companies />
-      <Contact />
+         <Contact marginClass="mt-[6rem]" containerClass="container4" />
     </div>
   );
 };

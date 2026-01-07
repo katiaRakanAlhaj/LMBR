@@ -1,8 +1,14 @@
-const NavLink = ({ title }) => {
+import { Link } from "react-router-dom";
+
+const NavLink = ({ title, path }) => {
   return (
-    <p className="text-white text-nowrap text-[1.1rem] cursor-pointer">
+    <Link
+      to={path}
+      className="text-white text-nowrap text-[1.1rem] cursor-pointer"
+    >
       {title}
-    </p>
+    </Link>
   );
 };
+
 export default NavLink;

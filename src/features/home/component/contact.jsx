@@ -2,11 +2,11 @@ import i18next from "i18next";
 import Button from "../../../component/ui/buuton";
 import Title from "../../../component/ui/title";
 import { useTranslation } from "react-i18next";
-const Contact = () => {
+const Contact = ({ containerClass , marginClass }) => {
     const { t } = useTranslation();
     return (
-        <div className="mt-[6rem] container4 mx-auto">
-            <div className="grid grid-cols-2 gap-x-[2rem]">
+        <div className={`${marginClass} ${containerClass} mx-auto`}>
+            <div className="grid grid-cols-2 gap-x-[3rem]">
                 {/* first column */}
                 <div className="flex flex-col justify-center">
                     <Title title={t("contact_us")} />

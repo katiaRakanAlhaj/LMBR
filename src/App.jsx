@@ -16,6 +16,10 @@ import Wrapper from './component/wrapper/wrapper';
 import Home from "./pages/Home";
 import VissionAndMission from "./pages/about/vission_mission";
 import AboutUs from "./pages/about/about_us";
+import Goals from "./pages/about/goals";
+import Certificates from "./pages/certificates";
+import Contact from "./pages/contact";
+import HealthAndSafety from "./pages/health_and_safety";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,7 +61,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/vission" element={<VissionAndMission />} />
           <Route path="/about" element={<AboutUs />} />
-
+          <Route path="/goals" element={<Goals />} />
+          <Route path="/certificates" element={<Certificates />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/health_and_safety" element={<HealthAndSafety />} />
         </Route>
       </Route>
     )
