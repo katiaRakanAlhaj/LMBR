@@ -170,7 +170,7 @@ const Navbar = () => {
             </div>
 
             <NavLink title={i18next.t("certificates")} path="/certificates" />
-            <NavLink title={i18next.t("company_equipment")} />
+            <NavLink title={i18next.t("company_equipment")} path = "/company_equipment"/>
             <NavLink title={i18next.t("health_and_safety")} path = "/health_and_safety"/>
             <NavLink title={i18next.t("contact_us")} path = "/contact"/>
           </div>

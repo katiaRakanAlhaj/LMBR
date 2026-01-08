@@ -22,6 +22,7 @@ import Contact from "./pages/contact";
 import HealthAndSafety from "./pages/health_and_safety";
 import SingleService from "./pages/single_service";
 import SingleProject from "./pages/single_project";
+import CompanyEquipment from "./pages/compmany_equipment";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -69,6 +70,7 @@ function App() {
           <Route path="/health_and_safety" element={<HealthAndSafety />} />
           <Route path="service/:id" element={<SingleService />} />
           <Route path="project/:id" element={<SingleProject />} />
+          <Route path="/company_equipment" element={<CompanyEquipment />} />
         </Route>
       </Route>
     )
