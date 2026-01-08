@@ -1,7 +1,10 @@
 import React, { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
   if (!isOpen) return null;
+
+  const services = servicesData[0];
 
   return (
     <div
@@ -12,31 +15,17 @@ const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
       }}
       className="absolute top-full left-[2rem] right-[2rem] z-50"
     >
-      <div className="grid grid-cols-3">
-        {servicesData.map((column, columnIndex) => (
-          <div 
-            key={columnIndex} 
-            className={`
-              border-r border-white/30 
-              ${columnIndex === servicesData.length? 'border-r-0' : ''}
-            `}
+      <div className="grid grid-rows-4 grid-flow-col">
+        {services.map((service) => (
+          <Link
+            key={service.id}
+            to={`/service/${service.id}`}
+            className="border border-white/30 text-white text-[1.1rem]
+                       hover:bg-[#263F57] transition-colors
+                       flex items-center justify-center min-h-[4rem] px-4"
           >
-            {column.map((service, serviceIndex) => (
-              <div
-                key={serviceIndex}
-                className={`
-                  border-b border-white/30 
-                  ${serviceIndex === column.length - 1 ? 'border-b-0' : ''}
-                `}
-              >
-                <div 
-                  className="text-white text-[1.1rem] hover:bg-[#263F57] cursor-pointer transition-colors duration-200 flex items-center justify-center min-h-[4rem] px-4"
-                >
-                  {service.title}
-                </div>
-              </div>
-            ))}
-          </div>
+            {service.title}
+          </Link>
         ))}
       </div>
     </div>
@@ -44,5 +33,4 @@ const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
 });
 
 ServicesMenu.displayName = "ServicesMenu";
-
 export default ServicesMenu;

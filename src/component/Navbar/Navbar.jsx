@@ -30,26 +30,23 @@ const Navbar = () => {
     { title: i18next.t("Golden Sieves Company") },
   ];
 
-  const servicesData = [
-    [
-      { title: i18next.t("service_1") },
-      { title: i18next.t("service_2") },
-      { title: i18next.t("service_3") },
-      { title: i18next.t("service_4") },
-    ],
-    [
-      { title: i18next.t("service_5") },
-      { title: i18next.t("service_6") },
-      { title: i18next.t("service_7") },
-      { title: i18next.t("service_8") },
-    ],
-    [
-      { title: i18next.t("service_9") },
-      { title: i18next.t("service_10") },
-      { title: i18next.t("service_11") },
-      { title: i18next.t("service_12") },
-    ],
-  ];
+ const servicesData = [
+  [
+    { id: 1, title: i18next.t("service_1") },
+    { id: 2, title: i18next.t("service_2") },
+    { id: 3, title: i18next.t("service_3") },
+    { id: 4, title: i18next.t("service_4") },
+    { id: 5, title: i18next.t("service_5") },
+    { id: 6, title: i18next.t("service_6") },
+    { id: 7, title: i18next.t("service_7") },
+    { id: 8, title: i18next.t("service_8") },
+    { id: 9, title: i18next.t("service_9") },
+    { id: 10, title: i18next.t("service_10") },
+    { id: 11, title: i18next.t("service_11") },
+    { id: 12, title: i18next.t("service_12") },
+  ],
+];
+
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem("language") || "ar";

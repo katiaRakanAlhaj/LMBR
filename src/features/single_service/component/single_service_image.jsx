@@ -3,7 +3,7 @@ import Banner from './../../../component/Banner/Banner';
 const SingleServiceImage = ()=> {
     return(
         <div>
-            <Banner title={"اعمال الطرق والجسور"}/>
+            <Banner image={singleServicebg} title={"اعمال الطرق والجسور"}/>
         </div>
     )
 }

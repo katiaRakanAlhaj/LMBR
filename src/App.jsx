@@ -20,6 +20,8 @@ import Goals from "./pages/about/goals";
 import Certificates from "./pages/certificates";
 import Contact from "./pages/contact";
 import HealthAndSafety from "./pages/health_and_safety";
+import SingleService from "./pages/single_service";
+import SingleProject from "./pages/single_project";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -65,6 +67,8 @@ function App() {
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/health_and_safety" element={<HealthAndSafety />} />
+          <Route path="service/:id" element={<SingleService />} />
+          <Route path="project/:id" element={<SingleProject />} />
         </Route>
       </Route>
     )
