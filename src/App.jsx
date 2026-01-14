@@ -24,6 +24,8 @@ import SingleService from "./pages/single_service";
 import SingleProject from "./pages/single_project";
 import CompanyEquipment from "./pages/compmany_equipment";
 import ModelOne from './pages/companyModel.jsx/model_one';
+import ModelTwo from "./pages/companyModel.jsx/model_two";
+import ModelThree from './pages/companyModel.jsx/model_three';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -72,7 +74,9 @@ function App() {
           <Route path="service/:id" element={<SingleService />} />
           <Route path="project/:id" element={<SingleProject />} />
           <Route path="/company_equipment" element={<CompanyEquipment />} />
-          <Route path="/company" element={<ModelOne />} />
+          <Route path="/company1" element={<ModelOne />} />
+          <Route path="/company2" element={<ModelTwo />} />
+           <Route path="/company3" element={<ModelThree />} />
         </Route>
       </Route>
     )

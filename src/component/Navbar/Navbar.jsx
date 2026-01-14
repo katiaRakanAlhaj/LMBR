@@ -25,9 +25,9 @@ const Navbar = () => {
   ];
 
   const companyItems = [
-    { title: i18next.t("future_meeting_company") ,path:"/company"},
-    { title: i18next.t("Al-Rafidain Construction Company") ,path:"/company"},
-    { title: i18next.t("Golden Sieves Company") , path:"/company" },
+    { title: i18next.t("future_meeting_company") ,path:"/company1"},
+    { title: i18next.t("Al-Rafidain Construction Company") ,path:"/company2"},
+    { title: i18next.t("Golden Sieves Company") , path:"/company3" },
   ];
 
  const servicesData = [

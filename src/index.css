@@ -36,6 +36,9 @@ html::-webkit-scrollbar {
     max-width: 55%;
     /* Prevent any overflow */
 }
+.container7{
+    max-width: 73%;
+}
 @media only screen and (max-width: 400px) {
     html {
         font-size: 14px;
