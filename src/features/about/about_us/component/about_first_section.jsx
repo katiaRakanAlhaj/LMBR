@@ -4,7 +4,7 @@ import about from "../../../../assets/images/about.jpg";
 const AboutFirstSection = () => {
     return (
         <div className="container2 mx-auto mt-[3.5rem]">
-            <div className="grid grid-cols-12 gap-x-[8rem]">
+            <div className="grid lg:grid-cols-12 grid-cols-1 gap-y-[2rem] gap-x-[8rem]">
                 {/* first column */}
                 <div className={`col-span-8 flex flex-col justify-center`}
                 >
@@ -19,7 +19,7 @@ const AboutFirstSection = () => {
                     className={`col-span-4`}
                 >
                     <img
-                        className="w-full h-[27rem] object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500"
+                        className="w-full lg:h-[27rem] h-[20rem] object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500"
                         src={about}
                     />
                 </div>

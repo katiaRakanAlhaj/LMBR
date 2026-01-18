@@ -8,9 +8,9 @@ const Companies = ()=> {
         <div className="mt-[4rem]">
             <div className="flex items-center justify-center flex-col text-center">
                 <Title title={"شركائنا"}/>
-                <p className="text-[1.2rem] text-[#333333] w-[50%] mt-[0.8rem]">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم</p>
+                <p className="text-[1.2rem] text-[#333333] lg:w-[50%] mt-[0.8rem]">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم</p>
                 <div className="container3 mx-auto">
-                    <div className="grid grid-cols-3  gap-x-[2rem]">
+                    <div className="grid md:grid-cols-3 grid-cols-1 md:gap-y-0  md:mt-0 mt-[2rem] gap-x-[2rem]">
                         {comp?.map((comp)=>(
                             <img className="w-full h-[8rem] object-contain" src={comp}/>
                         ))}

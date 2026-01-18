@@ -1,10 +1,11 @@
 import i18n from "../../../../i18n";
 import image from "../../../../assets/images/bannermodel3.png";
 
-const ModelTwoBanner = () => {
+const ModelTwoBannerMobile = () => {
     return (
         <div>
-            <div className="relative w-full lg:h-[62rem] h-[30rem] overflow-hidden">
+            {/* Desktop version with SVG */}
+            <div className="hidden lg:block relative w-full h-[30rem] overflow-hidden">
                 <svg
                     viewBox="0 0 1460 600"
                     preserveAspectRatio="xMidYMid slice"
@@ -54,14 +55,17 @@ const ModelTwoBanner = () => {
                 {/* Flex container for text + image */}
                 <div className="absolute top-1/2 lg:left-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 lg:mt-[-5rem] mt-[-2rem] flex w-[90%] z-10">
                     {/* Image (3/4 width) */}
-                    <div className="lg:w-3/4 w-1/2">
-                        <img src={image} alt="Banner" className={`w-full h-[32rem] object-contain ${i18n.language == "ar" ? 'mr-[-8rem]' : 'ml-[-8rem]'}`} />
+                    <div className=" w-1/2">
+                        <img 
+                            src={image} 
+                            alt="Banner" 
+                            className={`w-[full] h-[12rem] object-contain ${i18n.language == "ar" ? 'mr-[-8rem]' : 'ml-[-8rem]'}`} 
+                        />
                     </div>
                     {/* Text (1/4 width) */}
                     <div className={`lg:w-1/4 w-1/2 text-white flex flex-col justify-center mt-[-5rem] ${i18n.language == "ar" ? 'lg:mr-[-11rem] mr-[-4rem]' : 'lg:ml-[-11rem] ml-[-4rem]'}`}>
                         <p className="font-bold text-[1.2rem] lg:text-[2.3rem] ">
                             شـركة بناء الرافدين
-
                         </p>
                         <p className="lg:text-[1.2rem] text-[0.8rem] mt-[1rem] lg:w-[140%]">
                             لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم
@@ -77,8 +81,32 @@ const ModelTwoBanner = () => {
                     {/* <img className="object-contain" src={leftimage} /> */}
                 </div>
             </div>
+
+            {/* Mobile version - stacked layout */}
+            <div className="lg:hidden block bg-gradient-to-b from-[#43515A] to-[#2A3B45] pt-8 pb-12">
+                <div className="container mx-auto px-4">
+                    {/* Image Section */}
+                    <div className="mb-8">
+                        <img 
+                            src={image} 
+                            alt="Banner" 
+                            className="w-full max-h-[25rem] object-contain" 
+                        />
+                    </div>
+                    
+                    {/* Text Section */}
+                    <div className="text-white text-center px-4">
+                        <h2 className="font-bold text-2xl md:text-3xl mb-4">
+                            شـركة بناء الرافدين
+                        </h2>
+                        <p className="text-base md:text-lg leading-relaxed">
+                            لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
 
-export default ModelTwoBanner;
+export default ModelTwoBannerMobile;

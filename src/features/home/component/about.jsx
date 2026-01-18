@@ -58,11 +58,11 @@ const About = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="grid grid-cols-12 gap-x-[8rem]">
+            <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[8rem] lg:gap-y-0 gap-y-[2rem]">
 
                 {/* First Column */}
                 <div
-                    className={`col-span-8 transform transition-all duration-700 ease-out ${firstColVisible
+                    className={`lg:col-span-8 col-span-full transform transition-all duration-700 ease-out ${firstColVisible
                         ? isRTL
                             ? "translate-x-0 opacity-100"
                             : "-translate-x-0 opacity-100"
@@ -83,7 +83,7 @@ const About = () => {
 
                 {/* Second Column */}
                 <div
-                    className={`col-span-4 transform transition-all duration-700 ease-out delay-100 ${secondColVisible
+                    className={`lg:col-span-4 col-span-full transform transition-all duration-700 ease-out delay-100 ${secondColVisible
                         ? isRTL
                             ? "translate-x-0 opacity-100"
                             : "-translate-x-0 opacity-100"
@@ -94,7 +94,7 @@ const About = () => {
                     onMouseLeave={handleMouseLeave}
                 >
                     <img
-                        className="w-full h-[27rem] object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500"
+                        className="w-full lg:h-[27rem] h-[20rem] object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500"
                         src={about}
                         alt="about"
                     />

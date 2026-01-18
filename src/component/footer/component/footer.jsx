@@ -16,11 +16,11 @@ const Footer = () => {
         { desc: i18next.t("contact_us") }
     ]
     return (
-        <div className="w-full h-[25rem] py-[3rem] bg-[#063252] mt-[6rem]">
+        <div className="w-full lg:h-[25rem] py-[3rem] bg-[#063252] mt-[6rem]">
             <div className="container5 mx-auto">
-                <div className="grid grid-cols-12">
-                    <div className="col-span-8">
-                        <div className="flex gap-x-[5rem]">
+                <div className="grid lg:grid-cols-12 grid-cols-1">
+                    <div className="lg:col-span-8 col-span-full">
+                        <div className="lg:flex gap-x-[5rem]">
                             <div className="flex flex-col">
                                 <img className={`w-[16rem] ${i18next.language == "ar"?'pr-[2rem]':'pl-[2rem]'}`} src={logoFooter} />
                                 <p className="text-[1.2rem] font-bold text-white mt-[2rem] mb-[2rem] text-center">{i18next.t("join_us")}</p>
@@ -29,7 +29,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div>
-                                <p className="font-bold text-white text-[1.2rem] mt-[1rem]">{i18next.t("Quick links")}</p>
+                                <p className="font-bold text-white text-[1.2rem] lg:mt-[1rem] mt-[2.5rem]">{i18next.t("Quick links")}</p>
                                 {firstItems?.map((firstItems) => (
                                     <div className="flex gap-x-2 space-y-4 items-center">
                                         <div className="w-[1.3rem] h-[0.15rem] rounded-full bg-[#099EC8] mt-3"></div>
@@ -39,7 +39,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-4 mt-[2.45rem]">
+                    <div className="lg:col-span-4 col-span-1 lg:mt-[2.45rem]">
                         {secondItems?.map((secondItems) => (
                             <div className="flex gap-x-2 space-y-4 items-center">
                                 <div className="w-[1.3rem] h-[0.15rem] rounded-full bg-[#099EC8] mt-3"></div>

@@ -18,7 +18,7 @@ const ImageHome = () => {
 
     return (
         <div>
-            <div className="w-full h-[100vh] relative">
+            <div className="w-full lg:h-[100vh] h-[24rem] relative">
                 {/* Swiper Slider */}
                 <Swiper
                     modules={[Autoplay]}
@@ -51,17 +51,17 @@ const ImageHome = () => {
                                 />
 
                                 {/* Description Overlay - يظهر عند التمرير */}
-                                <div className="absolute inset-0 flex items-center justify-center -bottom-[9rem] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                                <div className="absolute inset-0 flex items-center justify-center lg:-bottom-[9rem] bottom-[-3rem] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
                                     {/* Dark Overlay للخلفية */}
                                     <div className="absolute inset-0 bg-black/40 transition-opacity duration-500 group-hover:opacity-100 opacity-0"></div>
 
                                     {/* Description Container */}
                                     <div className="relative z-10 transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-out delay-100">
                                         <div className="p-8 rounded-lg max-w-2xl mx-4">
-                                            <p className="text-[#E7792D] font-bold text-[2rem] text-center leading-relaxed">
+                                            <p className="text-[#E7792D] font-bold lg:text-[2rem] text-[1.3rem] text-center leading-relaxed">
                                                 {item.title}
                                             </p>
-                                            <p className="text-white text-xl md:text-2xl lg:text-[1.2rem] text-center leading-relaxed">
+                                            <p className="text-white text-xl md:text-2xl lg:text-[1.2rem] txet-[1rem] text-center leading-relaxed">
                                                 {item.description}
                                             </p>
                                         </div>

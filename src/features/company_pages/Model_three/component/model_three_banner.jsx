@@ -6,7 +6,7 @@ import i18n from "../../../../i18n";
 const ModelThreeBanner = () => {
     return (
         <div className="relative">
-            <div className="w-full h-[45rem] relative">
+            <div className="w-full lg:h-[45rem] h-[20rem] relative">
                 {/* Orange background extending 20rem more */}
                 <div
                     className="absolute w-full bg-[#E5AC62] -z-30"
@@ -46,10 +46,10 @@ const ModelThreeBanner = () => {
                     />
                 </div>
 
-                <div className={`absolute w-[25rem] -bottom-[1rem] object-cover ${i18n.language == "ar" ? 'right-[10rem]' : 'left-[10rem]'}`}>
+                <div className={`absolute lg:w-[25rem] w-[10rem] -bottom-[1rem] object-cover ${i18n.language == "ar" ? 'lg:right-[10rem] right-[1rem]' : 'lg:left-[10rem] left-[2rem]'}`}>
                     <img src={imagemodel3} alt="Model 3" />
                 </div>
-                <div className={`absolute ${i18n.language == "ar" ? 'right-1/2' : 'left-1/2'} mt-[-2.5rem] top-1/2`}>
+                <div className={`absolute lg:block hidden ${i18n.language == "ar" ? 'right-1/2' : 'left-1/2'} mt-[-2.5rem] top-1/2`}>
                     <h1 className="font-[700] text-white lg:text-[2.3rem] text-[1.8rem]">
                         شــركة المناخل الذهبية
                     </h1>

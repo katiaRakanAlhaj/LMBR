@@ -6,8 +6,8 @@ const SectionGrid = ({ title, description, image, layout = "grid", reverse = fal
             <div
                 className={
                     isColumn
-                        ? "flex flex-col gap-6 mt-[5rem]"
-                        : `grid grid-cols-12 gap-x-[4rem] mt-[5rem] ${reverse ? "flex-row-reverse" : ""}`
+                        ? "flex flex-col gap-6 lg:mt-[5rem] mt-[2rem]"
+                        : `grid lg:grid-cols-12 grid-cols-1 gap-y-[1.5rem] gap-x-[4rem] lg:mt-[5rem] mt-[3.5rem] ${reverse ? "flex-row-reverse" : ""}`
                 }
             >
                 {/* Text */}
@@ -15,7 +15,7 @@ const SectionGrid = ({ title, description, image, layout = "grid", reverse = fal
                     className={
                         isColumn
                             ? ""
-                            : `col-span-7 flex flex-col justify-center ${reverse ? "order-2" : "order-1"}`
+                            : `lg:col-span-7 col-span-full flex flex-col justify-center ${reverse ? "order-2" : "order-1"}`
                     }
                 >
                     <h1 className="text-[#333333] text-[1.3rem] font-bold">{title}</h1>
@@ -29,12 +29,12 @@ const SectionGrid = ({ title, description, image, layout = "grid", reverse = fal
                     className={
                         isColumn
                             ? ""
-                            : `col-span-5 ${reverse ? "order-1" : "order-2"}`
+                            : `lg:col-span-5 col-span-1 ${reverse ? "order-1" : "order-2"}`
                     }
                 >
                     <img
                         src={image}
-                        className={`w-full ${isColumn ? "h-[24rem]" : "h-[19rem]"} object-cover rounded-3xl`}
+                        className={`w-full ${isColumn ? "lg:h-[24rem] h-[20rem]" : "lg:h-[19rem] h-[20rem]"} object-cover rounded-3xl`}
                         alt=""
                     />
                 </div>

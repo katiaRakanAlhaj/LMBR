@@ -26,8 +26,8 @@ const GoalsFirstSection = () => {
     };
 
     return (
-        <div className="container2 mx-auto mt-[5rem]">
-            <div className="grid grid-cols-2 gap-[4rem]">
+        <div className="container2 mx-auto lg:mt-[5rem] mt-[4rem]">
+            <div className="grid lg:grid-cols-2 gap-[4rem]">
                 {/* العمود الأول - الصورة */}
                 <div>
                     <img

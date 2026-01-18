@@ -40,7 +40,7 @@ const ModelOneProjects = () => {
     ];
 
     return (
-        <div className="container2 mx-auto mt-[6rem]">
+        <div className="container2 mx-auto lg:mt-[6rem] mt-[3rem]">
             {/* Title */}
             <div className="flex gap-x-2 items-center">
                 <div className="w-[2rem] h-[1rem] bg-[#099EC8]" />
@@ -51,10 +51,10 @@ const ModelOneProjects = () => {
             </p>
 
             {/* Grid */}
-            <div className="grid grid-cols-4 gap-[1rem] mt-[2rem]">
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[1rem] mt-[2rem]">
                 {items.map((item) => (
                     <Link to={`/project/${item.id}`} key={item.id}>
-                        <div className="h-[27rem] rounded-md relative overflow-hidden group cursor-pointer">
+                        <div className="lg:h-[27rem] h-[20rem] rounded-md relative overflow-hidden group cursor-pointer">
                             {/* Image */}
                             <img
                                 src={item.image}

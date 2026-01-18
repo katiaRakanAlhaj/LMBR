@@ -87,7 +87,7 @@ const Projects = () => {
     };
 
     return (
-        <div className="h-[46rem] w-full bg-[#063252] mt-[8rem]">
+        <div className="h-[46rem] w-full bg-[#063252] lg:mt-[8rem] mt-[2rem]">
             <div className="flex flex-col justify-center items-center pt-[5rem]">
                 <Title title={"مشاريعنا"} />
                 <p className="text-white text-[1.2rem] mt-2">نبني للمستقبل، وفقاً لأعلى معايير الجودة والاحترافية.</p>
@@ -138,7 +138,7 @@ const Projects = () => {
                                 <SwiperSlide key={item.id}>
                                     <Link to={`/project/${item.id}`}
                                     >
-                                        <div className="h-[25rem] rounded-lg relative overflow-hidden group cursor-pointer">
+                                        <div className="lg:h-[25rem] h-[20rem] rounded-lg relative overflow-hidden group cursor-pointer">
                                             <img
                                                 src={item.image}
                                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -164,12 +164,12 @@ const Projects = () => {
                                             {/* Description container - Slides up from bottom on hover */}
                                             <div className="absolute px-[1.4rem] flex justify-between bottom-0 left-0 right-0 h-0 group-hover:h-[6rem] transition-all duration-500 ease-in-out overflow-hidden">
                                                 <div className="text-white transform translate-y-full group-hover:translate-y-0 transition-transform">
-                                                    <h3 className={`text-[1.4rem] font-bold mb-2 ${i18next.language == "ar" ? 'text-right' : 'text-left'}`}>{item.title}</h3>
-                                                    <p className={`text-[1.1rem] leading-relaxed ${i18next.language == "ar" ? 'text-right' : 'text-left'} opacity-90`}>{item.date}</p>
+                                                    <h3 className={`lg:text-[1.4rem] text-[1rem] font-bold mb-2 ${i18next.language == "ar" ? 'text-right' : 'text-left'}`}>{item.title}</h3>
+                                                    <p className={`lg:text-[1.1rem] text-[1rem] leading-relaxed ${i18next.language == "ar" ? 'text-right' : 'text-left'} opacity-90`}>{item.date}</p>
 
                                                 </div>
-                                                <div className='w-[3rem] h-[3rem] bg-secondary transform translate-y-full group-hover:translate-y-0 transition-transform flex justify-center items-center'>
-                                                    <icon className="text-white text-[1.5rem]">
+                                                <div className='lg:w-[3rem] w-[2rem] lg:h-[3rem] h-[2rem] bg-secondary transform translate-y-full group-hover:translate-y-0 transition-transform flex justify-center items-center'>
+                                                    <icon className="text-white lg:text-[1.5rem] text-[1rem]">
                                                         {i18next.language == "ar" ? <GoArrowUpLeft /> : <GoArrowUpRight />}
                                                     </icon>
                                                 </div>

@@ -8,7 +8,6 @@ import DropdownMenu from "./dropdownMenu";
 import ServicesMenu from "./servicesMenu";
 import SocialIcons from "./socialIcons";
 import NavLink from "./NavLink";
-
 const Navbar = () => {
   const { language, setLanguage } = useContext(MyContext);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);

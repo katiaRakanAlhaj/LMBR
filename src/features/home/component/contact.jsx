@@ -6,12 +6,12 @@ const Contact = ({ containerClass , marginClass }) => {
     const { t } = useTranslation();
     return (
         <div className={`${marginClass} ${containerClass} mx-auto`}>
-            <div className="grid grid-cols-2 gap-x-[3rem]">
+            <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-[3rem]">
                 {/* first column */}
                 <div className="flex flex-col justify-center">
                     <Title title={t("contact_us")} />
                     <h1 className="font-bold text-primary text-[2rem] mt-[1rem]">{t("contact_information")}</h1>
-                    <div className="grid grid-cols-3 gap-x-[2rem] mt-[1rem]">
+                    <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-y-0 gap-y-[2rem] gap-x-[2rem] mt-[1rem]">
                         <div className= "flex flex-col">
                             <h1 className="text-secondary text-[1.1rem]">{i18next.t("address")}</h1>
                             <p className="w-[80%] text-[#333333] text-[1rem]">العراق - بغداد المنصور -حي المتنبي</p>
@@ -42,7 +42,7 @@ const Contact = ({ containerClass , marginClass }) => {
     </div>
                  </div>
                          {/*second column */}
-                <div  style={{ boxShadow: '0px 0px 4px 0px #00000040' }} className="w-full h-auto border py-[4rem] px-[3rem]">
+                <div  style={{ boxShadow: '0px 0px 4px 0px #00000040' }} className="w-full h-auto border py-[4rem] lg:px-[3rem] px-[1rem] md:mt-[4rem] lg:mt-0 mt-[4rem]">
                     <h1 className="text-[#002623] font-bold text-[2rem]">{t("contact")}</h1>
                <form className="mt-[1rem] space-y-[1.4rem]">
                         <input style={{ boxShadow: '0px 0px 4px 0px #00000040' }} className="w-full h-[3.7rem] rounded-sm border outline-none px-4" placeholder={t('your_name')} />

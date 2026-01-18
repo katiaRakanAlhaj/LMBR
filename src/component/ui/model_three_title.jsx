@@ -4,8 +4,8 @@ const ModelThreeTitle = ({title}) => {
     return (
         <div className={`flex items-center gap-x-2`}>
 
-            <img className="w-[3rem]" src={icon} />
-            <p className="font-bold text-[#333333] text-[1.5rem] mt-2">
+            <img className="lg:w-[3rem] w-[2rem]" src={icon} />
+            <p className="font-bold text-[#333333] lg:text-[1.5rem] text-nowrap text-[1.2rem] mt-2">
                 {title} 
             </p>
         </div>

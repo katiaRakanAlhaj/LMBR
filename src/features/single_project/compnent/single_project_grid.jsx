@@ -11,9 +11,9 @@ const SingleProjectGrid = () => {
     const { t } = useTranslation();
     return (
         <div className="container2 mx-auto">
-            <div className="grid grid-cols-12 mt-[3.5rem] gap-[2.5rem]">
+            <div className="grid lg:grid-cols-12 grid-cols-1 gap-y-[2rem] mt-[3.5rem] gap-[2.5rem]">
                 {/* first column*/}
-                <div className="col-span-8">
+                <div className="lg:col-span-8 col-span-1">
                     {/* first section */}
                     <div>
                         <h1 className="text-[#333333] text-[1.3rem] font-bold">لوريم ايبسوم هو نموذج افتراضي</h1>
@@ -23,7 +23,7 @@ const SingleProjectGrid = () => {
                         <img className="w-full h-[20rem] mt-[1rem] object-cover rounded-3xl" src={singleProject1} />
                     </div>
                     {/* second section */}
-                    <div className="grid grid-cols-2 mt-[2rem] gap-x-[2rem]">
+                    <div className="grid lg:grid-cols-2 gap-y-[1.5rem] grid-cols-1 mt-[2rem] gap-x-[2rem]">
                         <div>
                             <h1 className="text-[#333333] text-[1.3rem] font-bold">لوريم ايبسوم هو نموذج افتراضي</h1>
                             <p className="leading-relaxed text-[1.2rem] text-[#333333] mt-3 text-justify">
@@ -44,7 +44,7 @@ const SingleProjectGrid = () => {
                 </div>
                 {/* second column*/}
                 {/* second column - sidebar */}
-                <div className="col-span-4 flex flex-col space-y-4">
+                <div className="lg:col-span-4 col-span-1 flex flex-col space-y-4">
                     <div className="flex justify-center items-center">
                         <Title title={t("Other projects")} />
                     </div>

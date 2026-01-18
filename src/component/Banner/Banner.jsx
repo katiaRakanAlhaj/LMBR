@@ -1,7 +1,7 @@
 const Banner = ({ image, title }) => {
   return (
     <div className="relative">
-      <div className="w-full h-[32rem]">
+      <div className="w-full lg:h-[32rem] h-[20rem]">
         {/* Background Image */}
         <div
           className="absolute w-full h-full bg-cover bg-center -z-10 transition-all duration-700"

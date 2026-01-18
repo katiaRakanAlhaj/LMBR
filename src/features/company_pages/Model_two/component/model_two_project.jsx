@@ -49,7 +49,7 @@ const ModelTwoProjects = () => {
 
 
             {/* Grid */}
-            <div className="grid grid-cols-3 gap-[3rem] mt-[2rem]">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-[3rem] gap-[2rem] mt-[2rem]">
                 {items.map((item) => (
                     <Link to={`/project/${item.id}`} key={item.id}>
                         <div className="h-[21rem] rounded-3xl relative overflow-hidden group cursor-pointer">

@@ -8,18 +8,18 @@ description,
   gap = "gap-x-4",
 }) => {
   return (
-    <div className="container7 mx-auto mt-[-1rem]">
-      <div className="grid grid-cols-12 gap-x-[2rem]">
+    <div className="container7 mx-auto lg:mt-[-1rem] mt-[-2rem]">
+      <div className="grid lg:grid-cols-12 gap-y-[2rem] grid-cols-1 gap-x-[2rem]">
         {/* Image column */}
-        <div className="col-span-5">
+        <div className="lg:col-span-5 col-span-1">
           <img
-            className="w-full h-[28rem] object-cover"
+            className="w-full lg:h-[28rem] h-[20rem] object-cover"
             src={image}
           />
         </div>
 
         {/* Content column */}
-        <div className="col-span-7 flex flex-col justify-center">
+        <div className="lg:col-span-7 col-span-full flex flex-col justify-center">
           <div className={`flex items-center ${gap}`}>
             <div
               style={{
