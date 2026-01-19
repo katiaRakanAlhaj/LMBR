@@ -21,7 +21,7 @@ const EmploymentSection = ({ items }) => {
               <p className="font-bold md:text-[2.3rem] text-[1.5rem] text-secondary">
                 {item.title}
               </p>
-              <p className="text-[#333333] md:text-[1.4rem] text-[1.1rem] font-bold text-nowrap">
+              <p className="text-[#333333] md:text-[1.4rem] text-[1.1rem] font-bold text-wrap">
                 {t(item.descKey)}
               </p>
             </div>

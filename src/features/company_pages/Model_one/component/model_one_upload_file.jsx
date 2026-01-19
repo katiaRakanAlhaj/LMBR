@@ -7,8 +7,8 @@ const ModelOneUploadFile = () => {
     const { t } = useTranslation();
     return (
         <div className={`fixed bottom-6 ${i18n.language == "ar" ? 'lg:right-[5rem] right-[1rem]' : 'lg:left-[5rem] left-[1rem]'} z-50`}>
-            <div className="relative w-[23rem] md:h-[3.8rem] h-[3rem] bg-[#063252E5] rounded-full flex justify-center items-center">
-                <p className="text-white font-bold text-[1rem]">
+            <div className="relative md:w-[23rem] w-[20rem] md:h-[3.8rem] h-[3rem] bg-[#063252E5] rounded-full flex justify-center items-center">
+                <p className="text-white font-bold md:text-[1rem] text-[0.8rem]">
                     {t("Download Company Profile")}
                 </p>
                 <img

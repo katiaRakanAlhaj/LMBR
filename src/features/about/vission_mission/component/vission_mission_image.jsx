@@ -1,9 +1,8 @@
 import Banner from "../../../../component/Banner/Banner";
-import bgAboutImg from "../../../../assets/images/bgAbout.jpg";
-const VissionAndMissionImage = ()=> {
+const VissionAndMissionImage = ({vissionData})=> {
     return(
         <div>
-            <Banner image={bgAboutImg} title={"الرؤية والمهمة"}/>
+            <Banner image={vissionData?.data?.banner} title={"الرؤية والمهمة"}/>
         </div>
     )
 }

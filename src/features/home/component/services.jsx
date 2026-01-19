@@ -1,34 +1,45 @@
 import { useRef, useState, useEffect } from "react";
 import Title from "../../../component/ui/title";
-import service1 from "../../../assets/images/service1.png";
-import service2 from "../../../assets/images/service2.png";
-import service3 from "../../../assets/images/service3.png";
-import service4 from "../../../assets/images/service4.png";
 import { GoArrowUpLeft, GoArrowUpRight } from "react-icons/go";
 import i18next from "i18next";
 import colorimg1 from "../../../assets/images/colorImg1.png";
 import colorimg2 from "../../../assets/images/colorImg2.png";
 import colorimg3 from "../../../assets/images/colorImg3.png";
 import colorimg4 from "../../../assets/images/colorImg4.png";
-
-const Services = () => {
+import DOMPurify from 'dompurify';
+const Services = ({homePageData, servicesData}) => {
     const sectionRef = useRef(null);
     const isRTL = i18next.language === "ar";
     const [isVisible, setIsVisible] = useState(false);
-    
-    // حالة لتتبع أي عنصر يتم التمرير عليه
     const [hoveredIndex, setHoveredIndex] = useState(null);
     
-    const items = [
-        { image: service1, image2: colorimg1, title: 'المقاولات العامة', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service2, image2: colorimg2, title: 'اعمال الطرق والجسور', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service3, image2: colorimg3, title: 'أعمال الكهرباء', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service4, image2: colorimg4, title: 'تصميم وبناء المشاريع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service1, image2: colorimg1, title: 'المقاولات العامة', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service2, image2: colorimg2, title: 'اعمال الطرق والجسور', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service3, image2: colorimg3, title: 'أعمال الكهرباء', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-        { image: service4, image2: colorimg4, title: 'تصميم وبناء المشاريع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم' },
-    ];
+    // استخدام بيانات API إذا كانت متاحة، وإلا استخدام البيانات الثابتة كبديل
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        if (servicesData?.data && servicesData.data.length > 0) {
+            // تحويل بيانات API إلى التنسيق المطلوب مع إضافة الصور الملونة
+            const apiItems = servicesData.data.map((service, index) => {
+                // اختيار صورة ملونة بناءً على الفهرس
+                const getColorImage = (index) => {
+                    const colorImages = [colorimg1, colorimg2, colorimg3, colorimg4];
+                    return colorImages[index % colorImages.length];
+                };
+
+                return {
+                    id: service.id,
+                    image: service.icon, // استخدام الأيقونة من API
+                    image2: getColorImage(index), // الصورة الملونة (ثابتة)
+                    title: service.title || '',
+                    description: service.description || '',
+                    rawDescription: service.description // حفظ الوصف الأصلي للاستخدام
+                };
+            });
+            setItems(apiItems);
+        } else {
+          setItems([])
+        }
+    }, [servicesData]);
 
     // Split items into rows (4 items per row)
     const rows = [];
@@ -65,7 +76,6 @@ const Services = () => {
 
     // Handlers for hover on cards
     const handleMouseEnter = (rowIndex, itemIndex) => {
-        // حساب المؤشر العام في المصفوفة الكاملة
         const globalIndex = (rowIndex * 4) + itemIndex;
         setHoveredIndex(globalIndex);
     };
@@ -123,6 +133,15 @@ const Services = () => {
         return isHovered ? "bg-secondary" : "bg-primary";
     };
 
+    // دالة لاستخراج النص العادي من HTML
+    const extractTextFromHTML = (htmlString) => {
+        if (!htmlString) return '';
+        // إزالة الوسوم HTML والحصول على النص فقط
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = DOMPurify.sanitize(htmlString, { ALLOWED_TAGS: [] });
+        return tempDiv.textContent || tempDiv.innerText || '';
+    };
+
     return (
         <div
             ref={sectionRef}
@@ -135,85 +154,94 @@ const Services = () => {
             </div>
 
             <div className={getDescriptionAnimationClass()}>
-                <p className="text-[#333333] text-[1.2rem] lg:w-[50%] mx-auto text-center mt-4">
-                    لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم
-                </p>
+                <p 
+                    dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(homePageData?.data?.services_description || 'وصف الخدمات')
+                    }} 
+                    className="text-[#333333] text-[1.2rem] lg:w-[50%] mx-auto text-center mt-4"
+                />
             </div>
-
+            
             <div className="mt-[3rem] container2 mx-auto">
-                {rows.map((row, rowIndex) => (
-                    <div
-                        key={rowIndex}
-                        className={getRowAnimationClass(rowIndex)}
-                    >
-                        <div className={`grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[2rem] ${rowIndex > 0 ? 'mt-[2rem]' : ''}`}>
-                            {row.map((item, itemIndex) => {
-                                const globalIndex = (rowIndex * 4) + itemIndex;
-                                const isHovered = hoveredIndex === globalIndex;
-                                
-                                return (
-                                    <div 
-                                        className="rounded-3xl group/card cursor-pointer"
-                                        key={`${rowIndex}-${itemIndex}`}
-                                        style={{
-                                            boxShadow: '0px 0px 8px 0px #00000040'
-                                        }}
-                                        onMouseEnter={() => handleMouseEnter(rowIndex, itemIndex)}
-                                        onMouseLeave={handleMouseLeave}
-                                    >
+                {
+                    rows.map((row, rowIndex) => (
+                        <div
+                            key={rowIndex}
+                            className={getRowAnimationClass(rowIndex)}
+                        >
+                            <div className={`grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[2rem] ${rowIndex > 0 ? 'mt-[2rem]' : ''}`}>
+                                {row.map((item, itemIndex) => {
+                                    const globalIndex = (rowIndex * 4) + itemIndex;
+                                    const isHovered = hoveredIndex === globalIndex;
+                                    const descriptionText = extractTextFromHTML(item.description);
+
+                                    return (
                                         <div
-                                            className="w-full h-[21rem] pt-[2rem] px-[1.5rem] flex flex-col relative"
+                                            className="rounded-3xl group/card cursor-pointer"
+                                            key={`${item.id}-${rowIndex}-${itemIndex}`}
+                                            style={{
+                                                boxShadow: '0px 0px 8px 0px #00000040'
+                                            }}
+                                            onMouseEnter={() => handleMouseEnter(rowIndex, itemIndex)}
+                                            onMouseLeave={handleMouseLeave}
                                         >
-                                            {/* الصورة مع تأثير الانتقال */}
-                                            <div className="relative w-[4rem] h-[4rem]">
-                                                {/* الصورة الأساسية */}
-                                                <img
-                                                    className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                />
-                                                
-                                                {/* الصورة الثانية (الملونة) */}
-                                                <img
-                                                    className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
-                                                    src={item.image2}
-                                                    alt={item.title}
-                                                />
-                                            </div>
-
-                                            {/* العنوان */}
-                                            <h1 className={`text-primary font-bold text-[1.4rem] mt-[2rem] transition-colors duration-300 ${isHovered ? 'text-secondary' : ''}`}>
-                                                {item.title}
-                                            </h1>
-                                            <p className="text-[0.9rem] text-[#333333] mt-[0.5rem] leading-[1.5rem] line-clamp-3">
-                                                {item.description}
-                                            </p>
-
-                                            {/* الزر مع تغيير اللون عند التمرير على الكارد */}
-                                            <button
-                                                className={`w-full text-[1.2rem] h-[3.7rem] group/btn absolute bottom-0 right-0 rounded-b-3xl flex items-center justify-center gap-x-2 transition-all duration-300 ${getButtonColor(isHovered)}`}
+                                            <div
+                                                className="w-full h-[21rem] pt-[2rem] px-[1.5rem] flex flex-col relative"
                                             >
-                                                <p className="text-white">
-                                                    {i18next.t("see_more")}
+                                                {/* الصورة مع تأثير الانتقال */}
+                                                <div className="relative w-[4rem] h-[4rem]">
+                                                    {/* الصورة الأساسية من API */}
+                                                    {item.image && (
+                                                        <img
+                                                            className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
+                                                            src={item.image}
+                                                           
+                                                        />
+                                                    )}
+
+                                                    {/* الصورة الثانية (الملونة) */}
+                                                    <img
+                                                        className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+                                                        src={item.image2}
+                                                    />
+                                                </div>
+
+                                                {/* العنوان */}
+                                                <h1 className={`text-primary font-bold text-[1.4rem] mt-[2rem] transition-colors duration-300 ${isHovered ? 'text-secondary' : ''}`}>
+                                                    {item.title}
+                                                </h1>
+                                                
+                                                {/* الوصف - استخدام النص المستخرج من HTML */}
+                                                <p className="text-[0.9rem] text-[#333333] mt-[0.5rem] leading-[1.5rem] line-clamp-3">
+                                                    {descriptionText}
                                                 </p>
 
-                                                {i18next.language === "ar" ? (
-                                                    <span className="text-white text-[1.4rem] transform transition-transform duration-300 group-hover/btn:-rotate-45">
-                                                        <GoArrowUpLeft />
-                                                    </span>
-                                                ) : (
-                                                    <span className="text-white text-[1.2rem] transform transition-transform duration-300 group-hover/btn:rotate-45">
-                                                        <GoArrowUpRight />
-                                                    </span>
-                                                )}
-                                            </button>
+                                                {/* الزر مع تغيير اللون عند التمرير على الكارد */}
+                                                <button
+                                                    className={`w-full text-[1.2rem] h-[3.7rem] group/btn absolute bottom-0 right-0 rounded-b-3xl flex items-center justify-center gap-x-2 transition-all duration-300 ${getButtonColor(isHovered)}`}
+                                                >
+                                                    <p className="text-white">
+                                                        {i18next.t("see_more")}
+                                                    </p>
+
+                                                    {i18next.language === "ar" ? (
+                                                        <span className="text-white text-[1.4rem] transform transition-transform duration-300 group-hover/btn:-rotate-45">
+                                                            <GoArrowUpLeft />
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-white text-[1.2rem] transform transition-transform duration-300 group-hover/btn:rotate-45">
+                                                            <GoArrowUpRight />
+                                                        </span>
+                                                    )}
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                }
             </div>
         </div>
     );

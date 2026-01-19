@@ -1,5 +1,6 @@
 import Title from './../../../../component/ui/title';
 import { useTranslation } from 'react-i18next';
+import DOMPurify  from 'dompurify';
 
 const VissionAndMissionGrid = ({ image, title, desccription, dir }) => {
     const { t } = useTranslation();
@@ -8,19 +9,23 @@ const VissionAndMissionGrid = ({ image, title, desccription, dir }) => {
     const firstColumn = dir === 'rtl' ?
         <div className="flex flex-col justify-center">
             <Title title={t(title)} />
-            <p className='text-[#333333] text-[1.2rem] leading-[2rem] mt-2'>{desccription}</p>
+            <p dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(desccription)
+            }} className='text-[#333333] text-[1.2rem] leading-[2rem] mt-2'/>
         </div> :
         <div>
-            <img className="w-full lg:h-[24rem] h-[20rem] object-cover rounded-3xl" src={image} alt={title} />
+            <img className="w-full lg:h-[24rem] h-[20rem] object-cover rounded-3xl" src={image} />
         </div>;
 
     const secondColumn = dir === 'rtl' ?
         <div>
-            <img className="w-full lg:h-[24rem] h-[20rem] object-cover rounded-3xl" src={image} alt={title} />
+            <img className="w-full lg:h-[24rem] h-[20rem] object-cover rounded-3xl" src={image} />
         </div> :
         <div className="flex flex-col justify-center">
             <Title title={t(title)} />
-            <p className='text-[#333333] text-[1.2rem] leading-[2rem] mt-2'>{desccription}</p>
+            <p className='text-[#333333] text-[1.2rem] leading-[2rem] mt-2' dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(desccription)
+            }} />
         </div>;
 
     return (

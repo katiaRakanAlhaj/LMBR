@@ -18,7 +18,7 @@ const ModelThreeProjects = () => {
                     <p className='text-[1.2rem] text-[#333333] flex text-justify leading-relaxed mt-[0.5rem]'>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور </p>
                 </div>
                 <div className='lg:col-span-4 col-span-1'>
-                    <img className='h-[20rem] rounded-xl object-cover' src={image2} />
+                    <img className='h-[20rem] rounded-xl object-cover w-full' src={image2} />
                 </div>
             </div>
             {/* third section */}

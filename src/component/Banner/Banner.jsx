@@ -1,3 +1,5 @@
+import i18n from "../../i18n";
+
 const Banner = ({ image, title }) => {
   return (
     <div className="relative">
@@ -22,7 +24,7 @@ const Banner = ({ image, title }) => {
         />
         {/* Title */}
       </div>
-      <div className="absolute right-[4rem] bottom-[4rem] font-[700] text-white lg:text-[2.3rem] text-[1.8rem]">
+      <div className={`absolute ${i18n.language == "ar"?'lg:right-[4rem] right-[2rem]':'lg:left-[4rem] left-[2rem]'} bottom-[4rem] font-[700] text-white lg:text-[2.3rem] text-[1.8rem]`}>
         {title}
       </div>
     </div>

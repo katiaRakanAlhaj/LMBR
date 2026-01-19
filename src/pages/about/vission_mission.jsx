@@ -2,14 +2,15 @@ import VissionAndMissionGrid from "../../features/about/vission_mission/componen
 import VissionAndMissionImage from "../../features/about/vission_mission/component/vission_mission_image";
 import vission1 from "../../assets/images/vission1.jpg";
 import vission2 from "../../assets/images/vission2.jpg";
+import { useFetchVission } from "../../features/about/vission_mission/hook/use_fetch_vission";
 const VissionAndMission = () => {
+    const {data:vissionData , isLoading:vissionDataLoading , error:vissionDataError} = useFetchVission();
     return (
         <div>
-            <VissionAndMissionImage />
-            <VissionAndMissionGrid image={vission1} dir = "ltr"  title="our_vission"
-                desccription={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواءلوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم "} />
-            <VissionAndMissionGrid image={vission2} dir="rtl" title="our_mission"
-                desccription={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواءلوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم "} />
+            <VissionAndMissionImage vissionData = {vissionData}/>
+            <VissionAndMissionGrid image={vissionData?.data?.vision_image} dir = "ltr"  title={vissionData?.data?.vision_title}
+                desccription={vissionData?.data?.vision_description} />
+            <VissionAndMissionGrid image={vissionData?.data?.mission_image} dir="rtl" title={vissionData?.data?.mission_title} desccription={vissionData?.data?.mission_description}/>
         </div>
     )
 }

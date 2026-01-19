@@ -59,8 +59,8 @@ const ModelOneBanner = () => {
       {/* TITLE */}
       <div className="absolute top-1/2 left-1/2 
         -translate-x-1/2 -translate-y-1/2 
-        font-bold text-white 
-        lg:text-[2.3rem] text-[1.8rem] 
+        font-bold text-white text-nowrap
+        lg:text-[2.3rem] text-[1.5rem] 
         z-10">
         شركة لقاء المستقبل
       </div>

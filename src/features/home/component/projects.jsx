@@ -7,6 +7,7 @@ import project2 from "../../../assets/images/project2.jpg";
 import project3 from "../../../assets/images/project3.jpg";
 import project4 from "../../../assets/images/project4.jpg";
 import { CgArrowLeft } from "react-icons/cg";
+import DOMPurify from 'dompurify';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,7 +18,7 @@ import { GoArrowUpLeft, GoArrowUpRight } from 'react-icons/go';
 import i18next from 'i18next';
 import { Link } from 'react-router-dom';
 
-const Projects = () => {
+const Projects = ({homePageData}) => {
     const images = [
         {
             id: 1,
@@ -90,7 +91,9 @@ const Projects = () => {
         <div className="h-[46rem] w-full bg-[#063252] lg:mt-[8rem] mt-[2rem]">
             <div className="flex flex-col justify-center items-center pt-[5rem]">
                 <Title title={"مشاريعنا"} />
-                <p className="text-white text-[1.2rem] mt-2">نبني للمستقبل، وفقاً لأعلى معايير الجودة والاحترافية.</p>
+                <p dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(homePageData?.data?.projects_description)
+                }} className="text-white text-[1.2rem] mt-2"/>
 
                 <div className="mt-[4rem] container mx-auto w-full px-4 relative">
                     <div
@@ -212,7 +215,8 @@ const Projects = () => {
                 
                 .custom-bullet-active {
                     background-color: #f59e0b !important;
-                    border-radius: 8px;
+                    border-radius: 8px;import { DOMPurify } from 'dompurify';
+
                 }
             `}</style>
         </div>

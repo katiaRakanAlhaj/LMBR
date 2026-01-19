@@ -105,7 +105,7 @@ const Navbar = () => {
         <SocialIcons />
 
         {/* Language Switcher */}
-        <div className={`absolute bottom-[0.6rem] ${i18next.language == "ar" ? 'left-[3.5rem]' : 'right-[3.5rem]'} flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50`}>
+        <div className={`absolute bottom-[0.6rem] ${i18next.language == "ar" ? 'left-[3.5rem]' : 'left-[3.5rem]'} flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50`}>
           <span
             className={`${language === "en" ? "font-bold text-[#263F57]" : ""}`}
             onClick={() => handleChange("en")}

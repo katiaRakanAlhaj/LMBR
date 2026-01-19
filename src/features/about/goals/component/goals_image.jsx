@@ -1,9 +1,10 @@
 import bgGoals from "../../../../assets/images/bgGoals.jpg";
 import Banner from "../../../../component/Banner/Banner";
-const GoladImage = ()=> {
+import i18n from "../../../../i18n";
+const GoladImage = ({goalsData})=> {
     return(
         <div>
-            <Banner image={bgGoals} title={"الأهداف"}/>
+            <Banner image={goalsData?.data?.banner} title={i18n.t("goals")}/>
         </div>
     )
 }

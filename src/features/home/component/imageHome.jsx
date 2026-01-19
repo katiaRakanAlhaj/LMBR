@@ -2,20 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import HomeImage from "../../../../src/assets/images/imageHome.jpg";
-import project1 from "../../../../src/assets/images/project1.jpg";
-import project2 from "../../../../src/assets/images/project2.jpg";
-import project3 from "../../../../src/assets/images/project3.jpg";
-
-const ImageHome = () => {
-    // Array of images with descriptions
-    const sliderImages = [
-        { image: HomeImage, title: 'لوريم ايبسوم دولار', description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابورياني" },
-        { image: project1, title: 'لوريم ايبسوم دولار', description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوتي" },
-        { image: project2, title: 'لوريم ايبسوم دولار', description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوتي" },
-        { image: project3, title: 'لوريم ايبسوم دولار', description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوتي" }
-    ];
-
+import DOMPurify from 'dompurify';
+const ImageHome = ({ sliderData }) => {
     return (
         <div>
             <div className="w-full lg:h-[100vh] h-[24rem] relative">
@@ -33,14 +21,14 @@ const ImageHome = () => {
                     pagination={false}
                     navigation={false}
                 >
-                    {sliderImages.map((item, index) => (
+                    {sliderData?.data?.map((item, index) => (
                         <SwiperSlide key={index}>
                             {/* Background Image Container */}
                             <div className="relative w-full h-full group">
                                 {/* Background Image */}
                                 <div
                                     className="absolute inset-0 bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${item.image})` }}
+                                    style={{ backgroundImage: `url(${item.banner})` }}
                                 />
                                 {/* Gradient Overlay */}
                                 <div
@@ -61,9 +49,10 @@ const ImageHome = () => {
                                             <p className="text-[#E7792D] font-bold lg:text-[2rem] text-[1.3rem] text-center leading-relaxed">
                                                 {item.title}
                                             </p>
-                                            <p className="text-white text-xl md:text-2xl lg:text-[1.2rem] txet-[1rem] text-center leading-relaxed">
-                                                {item.description}
-                                            </p>
+                                            <p dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(item.description)
+                                            }} className="text-white text-xl md:text-2xl lg:text-[1.2rem] txet-[1rem] text-center leading-relaxed" />
+
                                         </div>
                                     </div>
                                 </div>

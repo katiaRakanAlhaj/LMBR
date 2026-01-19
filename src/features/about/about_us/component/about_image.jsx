@@ -1,9 +1,8 @@
 import Banner from './../../../../component/Banner/Banner';
-import bgAbout from "../../../../assets/images/bgAbout.jpg";
-const AboutImage = ()=> {
+const AboutImage = ({aboutData})=> {
     return(
         <div>
-            <Banner title={"من نحن"} image={bgAbout}/>
+            <Banner title={aboutData?.data?.title} image={aboutData?.data?.image}/>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import about from "../../../assets/images/about.jpg";
 import Title from "../../../component/ui/title";
-import { GoArrowUpLeft, GoArrowUpRight } from "react-icons/go";
 import i18next from "i18next";
 import Button from "../../../component/ui/buuton";
 
@@ -96,7 +95,6 @@ const About = () => {
                     <img
                         className="w-full lg:h-[27rem] h-[20rem] object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500"
                         src={about}
-                        alt="about"
                     />
                 </div>
             </div>

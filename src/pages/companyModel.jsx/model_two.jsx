@@ -15,7 +15,7 @@ const ModelTwo = ()=> {
                <ModelTwoBannerMobile/> 
             </div>
             <ModelOneUploadFile/>
-            <div className="mt-[-8rem]">
+            <div className="lg:mt-[-8rem] mt-[5rem]">
                 <ModelTwoAbout/>
             </div>
             <ModelTwoEmployment/>

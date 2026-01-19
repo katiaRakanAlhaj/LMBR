@@ -56,7 +56,7 @@ const CompanyEquipmentGrid = () => {
 
             </div>
             <div className='absolute  lg:block hidden w-[8rem] h-[8rem] rounded-full bg-secondary top-1/2 translate-y-1/2 left-0 z-10'></div>
-            <div className='absolute lg:block hidden top-1/2 mt-[2rem] left-[-10rem]  z-10 overflow-x-hidden'>
+            <div className='absolute lg:block hidden top-1/2 mt-[2rem] left-[-10rem]  z-10 overflow-x-hidden overflow-y-hidden'>
                 <img className='h-[10rem] w-[20rem] object-contain overflow-x-hidden -rotate-45' src={equip2} />
 
             </div>

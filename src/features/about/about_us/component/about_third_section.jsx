@@ -1,8 +1,9 @@
 import about1 from "../../../../assets/images/about1.png";
 import about2 from "../../../../assets/images/about2.png";
 import about3 from "../../../../assets/images/about3.png";
+import DOMPurify from 'dompurify';
 
-const AboutThirdSection = () => {
+const AboutThirdSection = ({ aboutData, solutionData }) => {
     const items = [
         { image: about1, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
         { image: about2, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
@@ -11,18 +12,22 @@ const AboutThirdSection = () => {
     return (
         <div className="container2 mx-auto lg:mt-[6rem] mt-[3rem]">
             <div className="flex justify-center flex-col items-center text-center">
-                <h1 className="font-bold lg:text-[2.1rem] text-[1.5rem] text-[#333333]">حلول مقاولات دقيقة تضمن لك راحة البال.</h1>
-                <p className="text-[1.2rem] lg:w-[70%] text-[#333333] text-center">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور </p>
+                <h1 className="font-bold lg:text-[2.1rem] text-[1.5rem] text-[#333333]">{aboutData?.data?.third_section_title}</h1>
+                <p dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(aboutData?.data?.third_section_description)
+                }} className="text-[1.2rem] lg:w-[70%] text-[#333333] text-center" />
             </div>
             <div className="grid lg:grid-cols-3 grid-cols-1 gap-y-[2rem] gap-x-[2rem] mt-[2rem]">
 
-                {items?.map((item) => (
+                {solutionData?.data?.map((solutionData) => (
                     <div className="flex flex-col items-center space-y-2">
                         <div className="lg:w-[8rem] lg:h-[8rem] md:w-[6rem] md:h-[6rem] w-[5rem] h-[5rem] mb-2 bg-primary rounded-full flex justify-center items-center">
-                            <img className="lg:w-[4rem] lg:h-[4rem] md:w-[3rem] md:h-[3rem] w-[2rem] h-[2rem] object-contain" src={item.image} />
+                            <img className="lg:w-[4rem] lg:h-[4rem] md:w-[3rem] md:h-[3rem] w-[2rem] h-[2rem] object-contain" src={solutionData.image} />
                         </div>
-                        <h1 className="font-bold text-[1.2rem] text-[#333333] flex text-center">{item.title}</h1>
-                        <p className="text-[#333333] text-center text-[0.9rem] w-[80%]">{item.description}</p>
+                        <h1 className="font-bold text-[1.2rem] text-[#333333] flex text-center">{solutionData.title}</h1>
+                        <p dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(solutionData.description)
+                        }} className="text-[#333333] text-center text-[0.9rem] w-[80%]" />
                     </div>
                 ))}
             </div>
