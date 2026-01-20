@@ -1,4 +1,3 @@
-import bgGoals from "../../../../assets/images/bgGoals.jpg";
 import Banner from "../../../../component/Banner/Banner";
 import i18n from "../../../../i18n";
 const GoladImage = ({goalsData})=> {

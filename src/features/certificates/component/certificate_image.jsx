@@ -1,10 +1,10 @@
 import Banner from "../../../component/Banner/Banner";
-import bgCer from "../../../assets/images/cerbg.jpg";
-const CertificateImage = ()=> {
+import i18n from "../../../i18n";
+const CertificateImage = ({certificatesData})=> {
     return(
         <div>
-            <Banner title={"الشهادات"} image={bgCer}/>
+            <Banner title={i18n.t("certificates")} image={certificatesData?.data?.banner}/>
         </div>
     )
 }
-export default CertificateImage
+export default CertificateImage;

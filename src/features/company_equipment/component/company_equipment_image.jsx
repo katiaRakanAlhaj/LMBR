@@ -1,9 +1,8 @@
 import Banner from "../../../component/Banner/Banner";
-import equipbg from "../../../assets/images/equipmentbg.jpg";
-const CompanyEquipmentImage = () => {
+const CompanyEquipmentImage = ({companyEquipmentData}) => {
     return (
         <div>
-            <Banner image={equipbg} title={"معدات الشركة"} />
+            <Banner image={companyEquipmentData?.data?.banner} title={"معدات الشركة"} />
         </div>
     )
 }

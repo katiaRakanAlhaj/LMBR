@@ -1,9 +1,9 @@
-import bgHealth from "../../../assets/images/bgHealth.jpg";
 import Banner from "../../../component/Banner/Banner";
-const HealthAndSafetyImage = ()=> {
+import i18n from "../../../i18n";
+const HealthAndSafetyImage = ({HealthAndSafetyData})=> {
     return(
         <div>
-            <Banner image={bgHealth} title={"الصحه والسلامة"}/>
+            <Banner image={HealthAndSafetyData?.data?.banner} title={i18n.t("health_and_safety")}/>
         </div>
     )
 }

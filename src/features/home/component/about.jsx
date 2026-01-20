@@ -3,8 +3,9 @@ import about from "../../../assets/images/about.jpg";
 import Title from "../../../component/ui/title";
 import i18next from "i18next";
 import Button from "../../../component/ui/buuton";
+import  DOMPurify  from 'dompurify';
 
-const About = () => {
+const About = ({ aboutData }) => {
     const sectionRef = useRef(null);
     const isRTL = i18next.language === "ar";
     const [firstColVisible, setFirstColVisible] = useState(false);
@@ -71,13 +72,13 @@ const About = () => {
                         }`}
                     onMouseLeave={handleMouseLeave}
                 >
-                    <Title title={"حول المجموعة"} />
+                    <Title title={aboutData?.data?.title} />
 
-                    <p className="text-[#333333] text-[1.2rem] mt-[0.8rem] leading-[2rem] text-justify">
-                        لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواءلوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواءلوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على
-                    </p>
+                    <p className="text-[#333333] text-[1.2rem] mt-[0.8rem] leading-[2rem] text-justify" dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(aboutData?.data?.description)
+                    }} />
 
-                   <Button title={i18next.t("see_more")}/>
+                    <Button title={i18next.t("see_more")} />
                 </div>
 
                 {/* Second Column */}
@@ -94,7 +95,7 @@ const About = () => {
                 >
                     <img
                         className="w-full lg:h-[27rem] h-[20rem] object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500"
-                        src={about}
+                        src={aboutData?.data?.banner}
                     />
                 </div>
             </div>

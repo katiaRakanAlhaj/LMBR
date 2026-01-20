@@ -7,6 +7,7 @@ import colorimg2 from "../../../assets/images/colorImg2.png";
 import colorimg3 from "../../../assets/images/colorImg3.png";
 import colorimg4 from "../../../assets/images/colorImg4.png";
 import DOMPurify from 'dompurify';
+import i18n from './../../../i18n';
 const Services = ({homePageData, servicesData}) => {
     const sectionRef = useRef(null);
     const isRTL = i18next.language === "ar";
@@ -150,7 +151,7 @@ const Services = ({homePageData, servicesData}) => {
             onMouseLeave={handleSectionMouseLeave}
         >
             <div className={`flex flex-col justify-center text-center items-center ${getTitleAnimationClass()}`}>
-                <Title title={"خدماتنا"} />
+                <Title title={i18n.t("our_services")} />
             </div>
 
             <div className={getDescriptionAnimationClass()}>

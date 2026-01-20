@@ -3,12 +3,13 @@ import company1 from "../../../assets/images/company1.png";
 import company2 from "../../../assets/images/company2.png";
 import company3 from "../../../assets/images/company3.png";
 import DOMPurify from 'dompurify';
+import i18n from "../../../i18n";
 const Companies = ({ homePageData }) => {
     const comp = [company1, company2, company3]
     return (
         <div className="mt-[4rem]">
             <div className="flex items-center justify-center flex-col text-center">
-                <Title title={"شركائنا"} />
+                <Title title={i18n.t("our_partners")} />
                 <p dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(homePageData?.data?.companies_description)
                 }} className="text-[1.2rem] text-[#333333] lg:w-[50%] mt-[0.8rem]" />

@@ -1,14 +1,10 @@
 import SectionGrid from './../../../component/ui/section_grid';
-import health1 from "../../../assets/images/health1.jpg";
-import health2 from "../../../assets/images/health2.jpg";
-import health3 from "../../../assets/images/health3.jpg";
-
-const HealthAndSafetyGrid = () => {
+const HealthAndSafetyGrid = ({HealthAndSafetyData}) => {
     return (
         <div>
-            <SectionGrid image={health1} description={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور "} title={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم"} />
-            <SectionGrid layout="column"  image={health2} description={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور "} title={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم"} />
-            <SectionGrid reverse image={health3} description={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور "} title={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم"} />
+            <SectionGrid image={HealthAndSafetyData?.data?.first_section_image} title={HealthAndSafetyData?.data?.first_section_title} description={HealthAndSafetyData?.data?.first_section_description} />
+            <SectionGrid layout="column"  image={HealthAndSafetyData?.data?.second_section_image} description={HealthAndSafetyData?.data?.second_section_description} title={HealthAndSafetyData?.data?.second_section_title} />
+            <SectionGrid reverse image={HealthAndSafetyData?.data?.third_section_image} description={HealthAndSafetyData?.data?.third_section_description} title={HealthAndSafetyData?.data?.third_section_title} />
 
         </div>
     )

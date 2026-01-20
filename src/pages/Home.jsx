@@ -7,14 +7,16 @@ import { useFetchHomePage } from "../features/home/hook/use_fetch_home_page";
 import { useFetchServices } from "../features/home/hook/use_fetch_services";
 import { useFetchSlider } from "../features/home/hook/use_fetch_slider";
 import Contact from './../features/home/component/contact';
+import { useFetchAboutUs } from './../features/about/about_us/hook/use_fetch_about_us';
 const Home = () => {
   const {data:homePageData , isLoading:homePageDataLoading , error:homePageDataError} = useFetchHomePage();
   const {data:sliderData , isLoading:sliderDataLoading , error:sliderDataError} = useFetchSlider();
   const {data:servicesData , isLoading:servicesDataLoading , error:servicesDataError} = useFetchServices();
+  const {data:aboutData , isLoading:aboutDataLoading , error:aboutDataError} = useFetchAboutUs();
   return (
     <div>
       <ImageHome sliderData = {sliderData}/>
-      <About />
+      <About aboutData = {aboutData}/>
       <Services homePageData = {homePageData} servicesData = {servicesData}/>
       <Projects homePageData = {homePageData}/>
       <Companies homePageData = {homePageData}/>

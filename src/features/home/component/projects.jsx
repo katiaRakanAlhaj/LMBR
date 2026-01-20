@@ -17,6 +17,7 @@ import 'swiper/css/autoplay';
 import { GoArrowUpLeft, GoArrowUpRight } from 'react-icons/go';
 import i18next from 'i18next';
 import { Link } from 'react-router-dom';
+import i18n from '../../../i18n';
 
 const Projects = ({homePageData}) => {
     const images = [
@@ -90,7 +91,7 @@ const Projects = ({homePageData}) => {
     return (
         <div className="h-[46rem] w-full bg-[#063252] lg:mt-[8rem] mt-[2rem]">
             <div className="flex flex-col justify-center items-center pt-[5rem]">
-                <Title title={"مشاريعنا"} />
+                <Title title={i18n.t("our_projects")} />
                 <p dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(homePageData?.data?.projects_description)
                 }} className="text-white text-[1.2rem] mt-2"/>

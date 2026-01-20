@@ -1,14 +1,5 @@
-import goal1 from "../../../../assets/images/goal1.png";
-import goal2 from "../../../../assets/images/goal1.png";
-import goal3 from "../../../../assets/images/goal1.png";
 import  DOMPurify  from 'dompurify';
-
 const GoalsSecondSection = ({ goalsData }) => {
-    const items = [
-        { image: goal1, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
-        { image: goal2, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
-        { image: goal3, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
-    ]
     return (
         <div className="container2 mx-auto mt-[7rem]">
             <div className="flex justify-center flex-col items-center text-center">
