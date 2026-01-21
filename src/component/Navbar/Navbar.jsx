@@ -8,7 +8,7 @@ import DropdownMenu from "./dropdownMenu";
 import ServicesMenu from "./servicesMenu";
 import SocialIcons from "./socialIcons";
 import NavLink from "./NavLink";
-const Navbar = () => {
+const Navbar = ({contactData , servicesData}) => {
   const { language, setLanguage } = useContext(MyContext);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isCompaniesDropdownOpen, setIsCompaniesDropdownOpen] = useState(false);
@@ -29,22 +29,6 @@ const Navbar = () => {
     { title: i18next.t("Golden Sieves Company") , path:"/company3" },
   ];
 
- const servicesData = [
-  [
-    { id: 1, title: i18next.t("service_1") },
-    { id: 2, title: i18next.t("service_2") },
-    { id: 3, title: i18next.t("service_3") },
-    { id: 4, title: i18next.t("service_4") },
-    { id: 5, title: i18next.t("service_5") },
-    { id: 6, title: i18next.t("service_6") },
-    { id: 7, title: i18next.t("service_7") },
-    { id: 8, title: i18next.t("service_8") },
-    { id: 9, title: i18next.t("service_9") },
-    { id: 10, title: i18next.t("service_10") },
-    { id: 11, title: i18next.t("service_11") },
-    { id: 12, title: i18next.t("service_12") },
-  ],
-];
 
 
   useEffect(() => {
@@ -102,7 +86,7 @@ const Navbar = () => {
                    flex items-center justify-between"
       >
         <img className="w-[10rem] mt-[-3rem]" src={logo} alt="Logo" />
-        <SocialIcons />
+        <SocialIcons contactData = {contactData}/>
 
         {/* Language Switcher */}
         <div className={`absolute bottom-[0.6rem] ${i18next.language == "ar" ? 'left-[3.5rem]' : 'left-[3.5rem]'} flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50`}>

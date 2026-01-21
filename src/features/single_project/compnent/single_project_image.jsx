@@ -1,6 +1,6 @@
 import bgPorject from "../../../assets/images/bgSingleProject.png";
 
-const SingleProjectImage = () => {
+const SingleProjectImage = ({singleProjectData}) => {
   return (
     <div className="relative">
       <div className="w-full h-[27rem] relative">
@@ -8,7 +8,7 @@ const SingleProjectImage = () => {
         <div
           className="absolute inset-0 bg-cover bg-center -z-10 transition-all duration-700"
           style={{
-            backgroundImage: `url(${bgPorject})`,
+            backgroundImage: `url(${singleProjectData?.banner})`,
             backgroundRepeat: "no-repeat",
           }}
         />
@@ -34,7 +34,7 @@ const SingleProjectImage = () => {
 
         {/* Title */}
         <div className="absolute right-[4rem] bottom-[4rem] z-20 font-[700] text-white lg:text-[2.3rem] text-[1.8rem]">
-          title
+          {singleProjectData?.title}
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { MyContext } from "../store";
 import i18next from "i18next";
 import i18n from "../../i18n";
 
-const NavbarMobile = () => {
+const NavbarMobile = ({ servicesData }) => {
   const { t } = useTranslation();
   const { language, setLanguage } = useContext(MyContext);
 
@@ -16,18 +16,18 @@ const NavbarMobile = () => {
   const [expandedSections, setExpandedSections] = useState({
     about: false,
     companies: false,
-    services: false
+    services: false,
   });
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const currentPath = location.pathname;
-  
+
   const aboutItems = [
-    { title: t("about_us"), path: '/about' },
-    { title: t("vision_and_mission"), path: '/vission' },
-    { title: t("goals"), path: '/goals' },
+    { title: t("about_us"), path: "/about" },
+    { title: t("vision_and_mission"), path: "/vission" },
+    { title: t("goals"), path: "/goals" },
   ];
 
   const companyItems = [
@@ -36,40 +36,32 @@ const NavbarMobile = () => {
     { title: t("Golden Sieves Company"), path: "/company3" },
   ];
 
-  const servicesItems = [
-    { id: 1, title: t("service_1"), path: "/service/1" },
-    { id: 2, title: t("service_2"), path: "/service/2" },
-    { id: 3, title: t("service_3"), path: "/service/3" },
-    { id: 4, title: t("service_4"), path: "/service/4" },
-    { id: 5, title: t("service_5"), path: "/service/5" },
-    { id: 6, title: t("service_6"), path: "/service/6" },
-    { id: 7, title: t("service_7"), path: "/service/7" },
-    { id: 8, title: t("service_8"), path: "/service/8" },
-    { id: 9, title: t("service_9"), path: "/service/9" },
-    { id: 10, title: t("service_10"), path: "/service/10" },
-    { id: 11, title: t("service_11"), path: "/service/11" },
-    { id: 12, title: t("service_12"), path: "/service/12" },
-  ];
+  const servicesItems =
+    servicesData?.data?.map((service) => ({
+      id: service.id,
+      title: service.title,
+      path: `/service/${service.id}`,
+    })) || [];
 
   const navItems = [
     { path: "/", label: t("home") },
-    { 
-      label: t("about_us"), 
+    {
+      label: t("about_us"),
       hasDropdown: true,
       key: "about",
-      items: aboutItems
+      items: aboutItems,
     },
-    { 
-      label: t("companies"), 
+    {
+      label: t("companies"),
       hasDropdown: true,
       key: "companies",
-      items: companyItems
+      items: companyItems,
     },
-    { 
-      label: t("services"), 
+    {
+      label: t("services"),
       hasDropdown: true,
       key: "services",
-      items: servicesItems
+      items: servicesItems,
     },
     { path: "/certificates", label: t("certificates") },
     { path: "/company_equipment", label: t("company_equipment") },
@@ -83,15 +75,15 @@ const NavbarMobile = () => {
       setExpandedSections({
         about: false,
         companies: false,
-        services: false
+        services: false,
       });
     }
   };
 
   const toggleDropdown = (key) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
-      [key]: !prev[key]
+      [key]: !prev[key],
     }));
   };
 
@@ -105,7 +97,7 @@ const NavbarMobile = () => {
   };
 
   const isActiveDropdown = (items) => {
-    return items.some(item => currentPath === item.path);
+    return items.some((item) => currentPath === item.path);
   };
 
   useEffect(() => {
@@ -152,10 +144,11 @@ const NavbarMobile = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full">
       {/* Header */}
-      <div 
+      <div
         className="flex justify-between items-center h-16 px-4"
         style={{
-          background: "linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15)), linear-gradient(0deg, rgba(231,121,45,0.6), rgba(231,121,45,0.6))"
+          background:
+            "linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15)), linear-gradient(0deg, rgba(231,121,45,0.6), rgba(231,121,45,0.6))",
         }}
       >
         <img
@@ -164,7 +157,7 @@ const NavbarMobile = () => {
           alt="Logo"
           className="h-10 w-auto object-cover cursor-pointer"
         />
-        
+
         <div className="flex items-center gap-4">
           {/* Language Switcher */}
           <div className="flex gap-x-2 text-white text-sm cursor-pointer">
@@ -182,11 +175,8 @@ const NavbarMobile = () => {
               AR
             </span>
           </div>
-          
-          <button
-            onClick={toggleMobileMenu}
-            className="text-2xl text-white"
-          >
+
+          <button onClick={toggleMobileMenu} className="text-2xl text-white">
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
@@ -194,7 +184,7 @@ const NavbarMobile = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 top-16 bg-black/50"
           onClick={toggleMobileMenu}
         />
@@ -233,7 +223,7 @@ const NavbarMobile = () => {
                       />
                     )}
                   </div>
-                  
+
                   {expandedSections[item.key] && (
                     <div className="bg-[#1a2c3d]">
                       {renderDropdownItems(item.items)}
@@ -253,7 +243,7 @@ const NavbarMobile = () => {
             </div>
           ))}
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

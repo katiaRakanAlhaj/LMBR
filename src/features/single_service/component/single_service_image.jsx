@@ -1,9 +1,8 @@
-import singleServicebg from "../../../assets/images/singleServcieBg.jpg";
 import Banner from './../../../component/Banner/Banner';
-const SingleServiceImage = ()=> {
+const SingleServiceImage = ({singleServiceData})=> {
     return(
         <div>
-            <Banner image={singleServicebg} title={"اعمال الطرق والجسور"}/>
+            <Banner image={singleServiceData?.banner} title={singleServiceData?.title}/>
         </div>
     )
 }

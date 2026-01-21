@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
   if (!isOpen) return null;
 
-  const services = servicesData[0];
+  // Safety check
+  if (!servicesData || !servicesData.data) return null;
 
   return (
     <div
@@ -15,8 +16,8 @@ const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
       }}
       className="absolute top-full left-[2rem] right-[2rem] z-50"
     >
-      <div className="grid grid-rows-4 grid-flow-col">
-        {services.map((service) => (
+      <div className="grid grid-rows-3 grid-flow-col">
+        {servicesData.data.map((service) => (
           <Link
             key={service.id}
             to={`/service/${service.id}`}

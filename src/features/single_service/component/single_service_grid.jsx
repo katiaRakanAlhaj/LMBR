@@ -1,14 +1,11 @@
 import SectionGrid from "../../../component/ui/section_grid";
-import single1 from "../../../assets/images/single1.jpg";
-import single2 from "../../../assets/images/single2.jpg";
-import single3 from "../../../assets/images/single3.jpg";
-
-const SingleServiceGrid = ()=> {
+const SingleServiceGrid = ({singleServiceData})=> {
+    console.log("singleServiceData",singleServiceData)
     return(
         <div>
-             <SectionGrid image={single1}  description={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور "} title={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم"} />
-            <SectionGrid image={single2} layout="column"   description={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور "} title={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم"} />
-            <SectionGrid image={single3} reverse  description={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور "} title={"لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم"} />
+             <SectionGrid image={singleServiceData?.first_section_image}  description={singleServiceData?.first_section_description} title={singleServiceData?.first_section_title} />
+            <SectionGrid image={singleServiceData?.second_section_image} layout="column"   description={singleServiceData?.second_section_description} title={singleServiceData?.second_section_title} />
+            <SectionGrid image={singleServiceData?.third_section_image} reverse  description={singleServiceData?.third_section_description} title={singleServiceData?.third_section_title} />
         </div>
     )
 }

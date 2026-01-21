@@ -1,12 +1,20 @@
+import { useParams } from "react-router-dom";
 import SingleServiceGrid from "../features/single_service/component/single_service_grid";
 import SingleServiceImage from "../features/single_service/component/single_service_image";
+import { useFetchSingleService } from "../features/single_service/hook/use_fetch_single_service";
 
-const SingleService = ()=> {
-    return(
-        <div>
-            <SingleServiceImage/>
-            <SingleServiceGrid/>
-        </div>
-    )
-}
+const SingleService = () => {
+  const { id } = useParams(); // 👈 get id from URL
+  const {
+    data: singleServiceData,
+    isLoading: singleServiceDataLoading,
+    error: singleServiceDataError,
+  } = useFetchSingleService(id);
+  return (
+    <div>
+      <SingleServiceImage singleServiceData = {singleServiceData} />
+      <SingleServiceGrid singleServiceData = {singleServiceData}/>
+    </div>
+  );
+};
 export default SingleService;

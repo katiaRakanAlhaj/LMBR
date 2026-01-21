@@ -2,13 +2,13 @@
 import { BiLogoFacebook } from "react-icons/bi";
 import { FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 
-const SocialIcons = ({ spacing = "1.5rem" }) => {
+const SocialIcons = ({ spacing = "1.5rem" ,contactData}) => {
   const social = [
-    { icon: <FaLinkedinIn />, link: "#" },
-    { icon: <FaInstagram />, link: "#" },
-    { icon: <FaTwitter />, link: "#" },
-    { icon: <BiLogoFacebook />, link: "#" },
-    { icon: <FaYoutube />, link: "#" },
+    { icon: <FaLinkedinIn />, link: contactData?.data?.linkedin },
+    { icon: <FaInstagram />, link: contactData?.data?.instagram },
+    { icon: <FaTwitter />, link: contactData?.data?.x },
+    { icon: <BiLogoFacebook />, link: contactData?.data?.facebook },
+    { icon: <FaYoutube />, link: contactData?.data?.youtube },
   ];
 
   return (

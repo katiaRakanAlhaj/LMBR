@@ -1,9 +1,9 @@
 import Contact from "../../home/component/contact";
 
-const ContactGrid = ()=> {
+const ContactGrid = ({contactData})=> {
     return(
         <div>
-         <Contact marginClass="mt-[4rem]" containerClass="container4" />
+         <Contact marginClass="mt-[4rem]" containerClass="container4" contactData = {contactData} />
         </div>
     )
 }

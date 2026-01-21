@@ -1,9 +1,10 @@
 import bgContact from "../../../assets/images/bgConatct.jpg";
 import Banner from "../../../component/Banner/Banner";
-const ContactImage = ()=> {
+import i18n from "../../../i18n";
+const ContactImage = ({contactData})=> {
     return(
         <div>
-            <Banner image={bgContact} title={"اتصل بنا"}/>
+            <Banner image={contactData?.data?.banner} title={i18n.t("contact_us")}/>
         </div>
     )
 }
