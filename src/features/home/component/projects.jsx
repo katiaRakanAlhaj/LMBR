@@ -38,7 +38,7 @@ const Projects = ({ homePageData, projectsData }) => {
   };
 
   return (
-    <div className="h-[46rem] w-full bg-[#063252] lg:mt-[8rem] mt-[2rem]">
+    <div className="h-[46rem] w-full bg-[#063252] lg:mt-[2rem] mt-[2rem]">
       <div className="flex flex-col justify-center items-center pt-[5rem]">
         <Title title={i18n.t("our_projects")} />
         <p
@@ -123,7 +123,7 @@ const Projects = ({ homePageData, projectsData }) => {
                           <h3
                             className={`lg:text-[1.4rem] text-[1rem] font-bold mb-2 ${i18next.language == "ar" ? "text-right" : "text-left"}`}
                           >
-                            {item.title}
+                            {item.name}
                           </h3>
                           <p
                             className={`lg:text-[1.1rem] text-[1rem] leading-relaxed ${i18next.language == "ar" ? "text-right" : "text-left"} opacity-90`}

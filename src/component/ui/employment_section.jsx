@@ -14,7 +14,6 @@ const EmploymentSection = ({ items }) => {
             <img
               className="md:w-[5rem] md:h-[5rem] w-[3rem] h-[3rem] object-contain"
               src={item.image}
-              alt={item.descKey}
             />
 
             <div>

@@ -34,7 +34,7 @@ const SingleProjectImage = ({singleProjectData}) => {
 
         {/* Title */}
         <div className="absolute right-[4rem] bottom-[4rem] z-20 font-[700] text-white lg:text-[2.3rem] text-[1.8rem]">
-          {singleProjectData?.title}
+          {singleProjectData?.name}
         </div>
       </div>
     </div>

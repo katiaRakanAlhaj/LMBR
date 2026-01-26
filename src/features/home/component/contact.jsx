@@ -1,7 +1,10 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import Button from "../../../component/ui/buuton";
 import Title from "../../../component/ui/title";
+import { useContactUs } from "../../contact/hook/use_post_contact";
 
 const inputClass =
   "w-full h-[3.7rem] rounded-sm border outline-none px-4 shadow-custom";
@@ -11,9 +14,39 @@ const textareaClass =
 
 const infoTextClass = "w-[80%] text-[#333333] text-[1rem]";
 const infoTitleClass = "text-secondary text-[1.1rem]";
+const errorClass = "text-red-500 text-sm mt-1";
 
 const Contact = ({ containerClass, marginClass, contactData }) => {
   const { t } = useTranslation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  
+  const { mutate: contactUsMutation, isPending, isError, isSuccess, error } = useContactUs();
+  const [formMessage, setFormMessage] = useState({ type: "", message: "" });
+
+  const onSubmit = (data) => {
+    setFormMessage({ type: "", message: "" });
+    
+    contactUsMutation(data, {
+      onSuccess: (response) => {
+        setFormMessage({
+          type: "success",
+          message: t("message_sent_successfully"),
+        });
+        reset();
+      },
+      onError: (error) => {
+        setFormMessage({
+          type: "error",
+          message: error.message || t("message_send_failed"),
+        });
+      },
+    });
+  };
 
   return (
     <div className={`${marginClass} ${containerClass} mx-auto`}>
@@ -68,16 +101,95 @@ const Contact = ({ containerClass, marginClass, contactData }) => {
             {t("contact")}
           </h1>
 
-          <form className="mt-[1rem] space-y-[1.4rem]">
-            <input className={inputClass} placeholder={t("your_name")} />
-            <input className={inputClass} placeholder={t("email")} />
-            <input className={inputClass} placeholder={t("subject")} />
-            <textarea
-              className={textareaClass}
-              placeholder={t("write_your_message")}
-            />
+          {/* Form Message */}
+          {formMessage.message && (
+            <div
+              className={`mt-4 p-3 rounded ${
+                formMessage.type === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {formMessage.message}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-[1rem] space-y-[1.4rem]">
+            {/* Name Input */}
+            <div>
+              <input
+                className={`${inputClass} ${errors.name ? "border-red-500" : ""}`}
+                placeholder={t("your_name")}
+                {...register("name", {
+                  required: t("name_required"),
+                  minLength: {
+                    value: 2,
+                    message: t("name_min_length"),
+                  },
+                })}
+              />
+              {errors.name && (
+                <p className={errorClass}>{errors.name.message}</p>
+              )}
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <input
+                className={`${inputClass} ${errors.email ? "border-red-500" : ""}`}
+                placeholder={t("email")}
+                type="email"
+                {...register("email", {
+                  required: t("email_required"),
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: t("invalid_email"),
+                  },
+                })}
+              />
+              {errors.email && (
+                <p className={errorClass}>{errors.email.message}</p>
+              )}
+            </div>
+
+            {/* Subject Input */}
+            <div>
+              <input
+                className={`${inputClass} ${errors.object ? "border-red-500" : ""}`}
+                placeholder={t("object")}
+                {...register("object", {
+                  required: t("subject_required"),
+                })}
+              />
+              {errors.object && (
+                <p className={errorClass}>{errors.object.message}</p>
+              )}
+            </div>
+
+            {/* Message Textarea */}
+            <div>
+              <textarea
+                className={`${textareaClass} ${errors.message ? "border-red-500" : ""}`}
+                placeholder={t("write_your_message")}
+                {...register("message", {
+                  required: t("message_required"),
+                  minLength: {
+                    value: 10,
+                    message: t("message_min_length"),
+                  },
+                })}
+              />
+              {errors.message && (
+                <p className={errorClass}>{errors.message.message}</p>
+              )}
+            </div>
+
             <div className="flex justify-end">
-              <Button title={i18next.t("send")} />
+              <Button 
+                title={isPending ? t("sending") : i18next.t("send")}
+                type="submit"
+                disabled={isPending}
+              />
             </div>
           </form>
         </div>

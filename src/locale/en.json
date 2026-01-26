@@ -37,5 +37,19 @@
     "Number of certificates of appreciation":"Number of certificates of appreciation",
     "our_services":"Our Services",
     "our_projects":"Our Projects",
-    "our_partners":"Our Partners"
+    "our_partners":"Our Partners",
+    "Downloading the file":"Downloading the file",
+      "message_sent_successfully": "Message sent successfully!",
+  "message_send_failed": "Failed to send message. Please try again.",
+  "sending": "Sending...",
+  "name_required": "Name is required",
+  "name_min_length": "Name must be at least 2 characters",
+  "email_required": "Email is required",
+  "invalid_email": "Invalid email address",
+  "subject_required": "Subject is required",
+  "message_required": "Message is required",
+  "message_min_length": "Message must be at least 10 characters",
+  "The page you're looking for has some errors. Please try again":"The page you're looking for has some errors. Please try again",
+  "Try again ":"Try again",
+  "Oops":"Oops"
 }

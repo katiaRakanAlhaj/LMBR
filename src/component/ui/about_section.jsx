@@ -1,7 +1,8 @@
+import DOMPurify from "dompurify";
 const AboutSection = ({
   image,
   title,
-description,
+  description,
   barColor = "#000",
   barWidth = "1rem",
   barHeight = "3rem",
@@ -33,13 +34,12 @@ description,
             </p>
           </div>
 
-        
-            <p
-              className="text-[#333333] leading-relaxed mt-3 text-[1.2rem]"
-            >
-              {description}
-            </p>
-         
+          <p
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(description),
+            }}
+            className="text-[#333333] leading-relaxed mt-3 text-[1.2rem]"
+          />
         </div>
       </div>
     </div>

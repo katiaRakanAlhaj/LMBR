@@ -10,7 +10,7 @@ const AboutFirstSection = ({ aboutData }) => {
                 >
                     <Title title={i18next.t("about_us")} />
 
-                    <p dangerouslySetInnerHTML={{
+                    <p ouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(aboutData?.data?.description)
                     }} className="text-[#333333] text-[1.2rem] mt-[0.8rem] leading-[2rem] text-justify" />
 

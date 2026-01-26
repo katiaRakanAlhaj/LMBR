@@ -16,7 +16,7 @@ const SingleProjectGrid = ({ singleProjectData, projectsData }) => {
           {/* first section */}
           <div>
             <h1 className="text-[#333333] text-[1.3rem] font-bold">
-              لوريم ايبسوم هو نموذج افتراضي
+              {singleProjectData?.title}
             </h1>
             <p
               dangerouslySetInnerHTML={{
@@ -69,7 +69,7 @@ const SingleProjectGrid = ({ singleProjectData, projectsData }) => {
         </div>
         {/* second column*/}
         {/* second column - sidebar */}
-        <div className="lg:col-span-4 col-span-1 flex flex-col space-y-4">
+        <div className="lg:col-span-4 col-span-1 flex flex-col space-y-[1.4rem]">
           <div className="flex justify-center items-center">
             <Title title={t("Other projects")} />
           </div>
@@ -81,15 +81,18 @@ const SingleProjectGrid = ({ singleProjectData, projectsData }) => {
               />
               <div className="flex justify-between mt-[1rem]">
                 <h1 className="text-[1.2rem] font-bold text-[#333333]">
-                  {item.title}
+                  {item.name}
                 </h1>
                 <p className="text-[1rem] text-[#333333]">
                   {formatDate(item.date)}
                 </p>
               </div>
-              <p className="text-[0.9rem] line-clamp-2 text-[#333333]">
-                {item.desc}
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(item.description),
+                }}
+                className="text-[0.9rem] line-clamp-2 text-[#333333]"
+              />
             </div>
           ))}
         </div>

@@ -8,7 +8,7 @@ import DropdownMenu from "./dropdownMenu";
 import ServicesMenu from "./servicesMenu";
 import SocialIcons from "./socialIcons";
 import NavLink from "./NavLink";
-const Navbar = ({contactData , servicesData}) => {
+const Navbar = ({contactData , servicesData , companyData}) => {
   const { language, setLanguage } = useContext(MyContext);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isCompaniesDropdownOpen, setIsCompaniesDropdownOpen] = useState(false);
@@ -23,12 +23,10 @@ const Navbar = ({contactData , servicesData}) => {
     { title: i18next.t("goals"), path: '/goals' },
   ];
 
-  const companyItems = [
-    { title: i18next.t("future_meeting_company") ,path:"/company1"},
-    { title: i18next.t("Al-Rafidain Construction Company") ,path:"/company2"},
-    { title: i18next.t("Golden Sieves Company") , path:"/company3" },
-  ];
-
+const companyItems = companyData?.data?.map((company) => ({
+  title: company.name,
+  path: `/company/${company.id}`, // dynamic route
+}));
 
 
   useEffect(() => {
