@@ -1,5 +1,3 @@
-import bgPorject from "../../../assets/images/bgSingleProject.png";
-
 const SingleProjectImage = ({singleProjectData}) => {
   return (
     <div className="relative">

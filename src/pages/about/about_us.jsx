@@ -1,3 +1,4 @@
+import ScrollToTop from "../../component/ScrollToTop/ScrollToTop";
 import AboutFirstSection from "../../features/about/about_us/component/about_first_section";
 import AboutFourthSection from "../../features/about/about_us/component/about_fourth_section";
 import AboutImage from "../../features/about/about_us/component/about_image";
@@ -11,6 +12,7 @@ const AboutUs = ()=> {
     const {data:solutionData , isLoading:solutionDataLoading , error:solutionDataError} = useFetchSolutions();
     return(
         <div>
+            <ScrollToTop/>
             <AboutImage aboutData = {aboutData}/> 
             <AboutFirstSection aboutData = {aboutData}/>
             <AboutSecondSection aboutData = {aboutData}/>

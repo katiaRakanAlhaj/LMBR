@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import logo from "../../assets/images/logo.png";
@@ -8,9 +8,13 @@ import { MyContext } from "../store";
 import i18next from "i18next";
 import i18n from "../../i18n";
 
-const NavbarMobile = ({ servicesData }) => {
+const NavbarMobile = ({ servicesData, companyData }) => {
   const { t } = useTranslation();
   const { language, setLanguage } = useContext(MyContext);
+
+  const [currentLogo, setCurrentLogo] = useState(logo);
+  const [companyName, setCompanyName] = useState("");
+  const [isCompanyPage, setIsCompanyPage] = useState(false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({
@@ -21,8 +25,37 @@ const NavbarMobile = ({ servicesData }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams(); // Get company ID from route params
 
   const currentPath = location.pathname;
+
+  // Effect to update logo and company name based on route
+  useEffect(() => {
+    // Check if we're on a company detail page
+    const companyPageCheck = location.pathname.startsWith("/company/");
+    setIsCompanyPage(companyPageCheck);
+
+    if (companyPageCheck && id && companyData?.data) {
+      // Find the company by ID
+      const currentCompany = companyData.data.find(
+        (company) => company.id.toString() === id,
+      );
+
+      if (currentCompany) {
+        // Use company logo if found
+        setCurrentLogo(currentCompany.logo);
+        setCompanyName(currentCompany.name);
+      } else {
+        // Fallback to default logo
+        setCurrentLogo(logo);
+        setCompanyName("");
+      }
+    } else {
+      // For all other pages, use default logo
+      setCurrentLogo(logo);
+      setCompanyName("");
+    }
+  }, [id, location.pathname, companyData]);
 
   const aboutItems = [
     { title: t("about_us"), path: "/about" },
@@ -30,11 +63,13 @@ const NavbarMobile = ({ servicesData }) => {
     { title: t("goals"), path: "/goals" },
   ];
 
-  const companyItems = [
-    { title: t("future_meeting_company"), path: "/company1" },
-    { title: t("Al-Rafidain Construction Company"), path: "/company2" },
-    { title: t("Golden Sieves Company"), path: "/company3" },
-  ];
+  // Use dynamic company items from API
+  const companyItems =
+    companyData?.data?.map((company) => ({
+      id: company.id,
+      title: company.name,
+      path: `/company/${company.id}`,
+    })) || [];
 
   const servicesItems =
     servicesData?.data?.map((service) => ({
@@ -127,7 +162,6 @@ const NavbarMobile = ({ servicesData }) => {
   };
 
   const renderDropdownItems = (items, isService = false) => {
-    // For both services and other dropdown items, they should have paths
     return items.map((item) => (
       <div
         key={item.id || item.path}
@@ -141,6 +175,57 @@ const NavbarMobile = ({ servicesData }) => {
     ));
   };
 
+  // Function to render the logo and company name for mobile
+  const renderLogoSection = () => {
+    if (isCompanyPage && companyName) {
+      return (
+        <div className="flex items-center gap-3">
+          <div
+            className={`h-12 w-auto object-cover ${!isCompanyPage ? "cursor-pointer hover:opacity-90 transition-opacity" : "cursor-default"}`}
+            onClick={handleLogoClick}
+          >
+            <img
+              src={currentLogo}
+              alt="Logo"
+              className="h-full w-full"
+              onError={(e) => {
+                e.target.src = logo;
+                setCurrentLogo(logo);
+              }}
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-white text-sm font-bold leading-tight">
+              {companyName}
+            </span>
+          </div>
+        </div>
+      );
+    }
+
+    // Default logo for non-company pages
+    return (
+      <img
+        onClick={handleNavigate}
+        src={currentLogo}
+        alt="Logo"
+        className="h-10 w-auto object-cover cursor-pointer"
+        onError={(e) => {
+          e.target.src = logo;
+          setCurrentLogo(logo);
+        }}
+      />
+    );
+  };
+  const handleLogoClick = () => {
+    // Only navigate to home if we're NOT on a company page
+    if (!isCompanyPage) {
+      navigate("/");
+      setIsMobileMenuOpen(false);
+    }
+    // If isCompanyPage is true, do nothing (prevent navigation)
+  };
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full">
       {/* Header */}
@@ -151,12 +236,8 @@ const NavbarMobile = ({ servicesData }) => {
             "linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15)), linear-gradient(0deg, rgba(231,121,45,0.6), rgba(231,121,45,0.6))",
         }}
       >
-        <img
-          onClick={handleNavigate}
-          src={logo}
-          alt="Logo"
-          className="h-10 w-auto object-cover cursor-pointer"
-        />
+        {/* Logo Section - Conditionally rendered */}
+        {renderLogoSection()}
 
         <div className="flex items-center gap-4">
           {/* Language Switcher */}

@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import about from "../../../assets/images/about.jpg";
 import Title from "../../../component/ui/title";
 import i18next from "i18next";
 import Button from "../../../component/ui/buuton";

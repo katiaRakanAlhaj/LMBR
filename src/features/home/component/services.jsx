@@ -2,13 +2,10 @@ import { useRef, useState, useEffect } from "react";
 import Title from "../../../component/ui/title";
 import { GoArrowUpLeft, GoArrowUpRight } from "react-icons/go";
 import i18next from "i18next";
-import colorimg1 from "../../../assets/images/colorImg1.png";
-import colorimg2 from "../../../assets/images/colorImg2.png";
-import colorimg3 from "../../../assets/images/colorImg3.png";
-import colorimg4 from "../../../assets/images/colorImg4.png";
 import DOMPurify from "dompurify";
 import i18n from "./../../../i18n";
 import { useNavigate } from "react-router-dom";
+
 const Services = ({ homePageData, servicesData }) => {
   const navigate = useNavigate();
   const sectionRef = useRef(null);
@@ -21,18 +18,12 @@ const Services = ({ homePageData, servicesData }) => {
 
   useEffect(() => {
     if (servicesData?.data && servicesData.data.length > 0) {
-      // تحويل بيانات API إلى التنسيق المطلوب مع إضافة الصور الملونة
-      const apiItems = servicesData.data.map((service, index) => {
-        // اختيار صورة ملونة بناءً على الفهرس
-        const getColorImage = (index) => {
-          const colorImages = [colorimg1, colorimg2, colorimg3, colorimg4];
-          return colorImages[index % colorImages.length];
-        };
-
+      // تحويل بيانات API إلى التنسيق المطلوب مع استخدام icon2 من API
+      const apiItems = servicesData.data.map((service) => {
         return {
           id: service.id,
-          image: service.icon, // استخدام الأيقونة من API
-          image2: getColorImage(index), // الصورة الملونة (ثابتة)
+          image: service.icon,    // الأيقونة الأساسية من API
+          image2: service.icon2,  // الأيقونة الثانية (icon2) من API
           title: service.title || "",
           description: service.description || "",
           rawDescription: service.description, // حفظ الوصف الأصلي للاستخدام
@@ -162,7 +153,7 @@ const Services = ({ homePageData, servicesData }) => {
         <p
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(
-              homePageData?.data?.services_description || "وصف الخدمات",
+              homePageData?.data?.services_description,
             ),
           }}
           className="text-[#333333] text-[1.2rem] lg:w-[50%] mx-auto text-center mt-4"
@@ -182,7 +173,7 @@ const Services = ({ homePageData, servicesData }) => {
 
                 return (
                   <div
-                  onClick={() => navigate(`/service/${item.id}`)}
+                    onClick={() => navigate(`/service/${item.id}`)}
                     className="rounded-3xl group/card cursor-pointer"
                     key={`${item.id}-${rowIndex}-${itemIndex}`}
                     style={{
@@ -194,7 +185,7 @@ const Services = ({ homePageData, servicesData }) => {
                     <div className="w-full h-[21rem] pt-[2rem] px-[1.5rem] flex flex-col relative">
                       {/* الصورة مع تأثير الانتقال */}
                       <div className="relative w-[4rem] h-[4rem]">
-                        {/* الصورة الأساسية من API */}
+                        {/* الصورة الأساسية (icon) من API */}
                         {item.image && (
                           <img
                             className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
@@ -202,11 +193,13 @@ const Services = ({ homePageData, servicesData }) => {
                           />
                         )}
 
-                        {/* الصورة الثانية (الملونة) */}
-                        <img
-                          className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
-                          src={item.image2}
-                        />
+                        {/* الصورة الثانية (icon2) من API */}
+                        {item.image2 && (
+                          <img
+                            className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
+                            src={item.image2}
+                          />
+                        )}
                       </div>
 
                       {/* العنوان */}

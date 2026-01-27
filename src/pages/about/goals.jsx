@@ -1,3 +1,4 @@
+import ScrollToTop from "../../component/ScrollToTop/ScrollToTop";
 import GoalsFirstSection from "../../features/about/goals/component/goals_first_section";
 import GoladImage from "../../features/about/goals/component/goals_image";
 import GoalsSecondSection from "../../features/about/goals/component/goals_second_section";
@@ -7,6 +8,7 @@ const Goals = ()=> {
     const {data:goalsData , isLoading : goalsDataLoading , error:goalsDataError} = useFetchGoals();
     return(
         <div>
+            <ScrollToTop/>
             <GoladImage goalsData = {goalsData}/>
             <GoalsFirstSection goalsData ={goalsData}/>
             <GoalsSecondSection goalsData = {goalsData}/>

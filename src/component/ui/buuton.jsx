@@ -1,10 +1,11 @@
 import i18next from "i18next";
 import { GoArrowUpLeft, GoArrowUpRight } from "react-icons/go";
 
-const Button = ({ title }) => {
+const Button = ({ title, showIcon = true, disabled = false }) => {
     return (
         <button
-            className="
+            disabled={disabled}
+            className={`
     group
     w-[10rem] h-[3rem]
     bg-primary
@@ -12,13 +13,14 @@ const Button = ({ title }) => {
     flex items-center justify-center gap-x-2
     transition-colors duration-300
     hover:bg-secondary
-  "
+    ${disabled ? "opacity-70 cursor-not-allowed hover:bg-primary" : ""}
+  `}
         >
             <p className="text-white text-[1.2rem]">
                 {title}
             </p>
 
-            {i18next.language == "ar" ? (
+            {showIcon && i18next.language == "ar" ? (
                 <span
                     className="
       text-white text-[1.4rem]
@@ -29,7 +31,7 @@ const Button = ({ title }) => {
                 >
                     <GoArrowUpLeft />
                 </span>
-            ) : (
+            ) : showIcon ? (
                 <span
                     className="
       text-white text-[1.4rem]
@@ -40,7 +42,7 @@ const Button = ({ title }) => {
                 >
                     <GoArrowUpRight />
                 </span>
-            )}
+            ) : null}
         </button>
     )
 }

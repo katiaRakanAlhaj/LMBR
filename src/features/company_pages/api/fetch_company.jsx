@@ -1,7 +1,6 @@
 import client from "../../../api/client";
 export const fetchCompanies = async () => {
   const response = await client.get("/companies");
-  console.log('response', response.data);
   return response.data || []; // Return empty array if no data
 };
 export const fetchSingleCompany = async (id) => {

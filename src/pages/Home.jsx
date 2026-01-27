@@ -10,6 +10,7 @@ import { useFetchAboutUs } from "./../features/about/about_us/hook/use_fetch_abo
 import { useFetchContactPage } from "../features/contact/hook/use_fetch_contact_page";
 import Partners from "../features/home/component/partners";
 import { useFetchProjects } from "../features/home/hook/use_fetch_projects";
+import ScrollToTop from "../component/ScrollToTop/ScrollToTop";
 const Home = () => {
   const {
     data: homePageData,
@@ -43,6 +44,7 @@ const Home = () => {
   } = useFetchProjects();
   return (
     <div>
+      <ScrollToTop/>
       <ImageHome sliderData={sliderData} />
       <About aboutData={aboutData} />
       <Services homePageData={homePageData} servicesData={servicesData} />
@@ -56,5 +58,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;

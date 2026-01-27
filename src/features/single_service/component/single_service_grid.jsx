@@ -1,6 +1,5 @@
 import SectionGrid from "../../../component/ui/section_grid";
 const SingleServiceGrid = ({singleServiceData})=> {
-    console.log("singleServiceData",singleServiceData)
     return(
         <div>
              <SectionGrid image={singleServiceData?.first_section_image}  description={singleServiceData?.first_section_description} title={singleServiceData?.first_section_title} />

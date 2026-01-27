@@ -25,7 +25,7 @@ const ModelOneProjects = ({ singleCompanyData }) => {
         className="text-[1.2rem] text-[#333333] mt-2"
       />
       {/* Grid */}
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[1rem] mt-[2rem]">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[1rem]">
         {singleCompanyData?.projects?.map((item) => (
           <Link to={`/project/${item.id}`} key={item.id}>
             <div className="lg:h-[27rem] h-[20rem] rounded-md relative overflow-hidden group cursor-pointer">

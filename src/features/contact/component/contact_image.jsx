@@ -1,4 +1,3 @@
-import bgContact from "../../../assets/images/bgConatct.jpg";
 import Banner from "../../../component/Banner/Banner";
 import i18n from "../../../i18n";
 const ContactImage = ({contactData})=> {

@@ -18,10 +18,10 @@ function Wrapper() {
         <Navbar companyData = {companyData} contactData = {contactData} servicesData = {servicesData}/>
       </div>
       <div className="lg:hidden md:block">
-        <NavbarMobile servicesData = {servicesData}/> 
+        <NavbarMobile servicesData = {servicesData} companyData={companyData}/> 
       </div>
       <Outlet />
-      <Footer footerData={footerData} contactData = {contactData}/>
+      <Footer footerData={footerData} contactData = {contactData} companyData={companyData}/>
     </div>
   );
 }

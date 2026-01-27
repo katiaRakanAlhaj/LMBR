@@ -52,7 +52,6 @@ const ModelOneUploadFile = ({ singleCompanyData }) => {
       window.URL.revokeObjectURL(blobUrl);
       
     } catch (error) {
-      console.error("Download failed:", error);
       // Fallback - open in same window if fetch fails
       window.location.href = singleCompanyData.company_file;
     } finally {

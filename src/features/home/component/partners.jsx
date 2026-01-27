@@ -1,7 +1,4 @@
 import Title from "../../../component/ui/title";
-import company1 from "../../../assets/images/company1.png";
-import company2 from "../../../assets/images/company2.png";
-import company3 from "../../../assets/images/company3.png";
 import DOMPurify from 'dompurify';
 import i18n from "../../../i18n";
 const Partners = ({ homePageData }) => {

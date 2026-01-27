@@ -1,14 +1,5 @@
-import about1 from "../../../../assets/images/about1.png";
-import about2 from "../../../../assets/images/about2.png";
-import about3 from "../../../../assets/images/about3.png";
 import DOMPurify from 'dompurify';
-
 const AboutThirdSection = ({ aboutData, solutionData }) => {
-    const items = [
-        { image: about1, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
-        { image: about2, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
-        { image: about3, title: 'لوريم ايبسوم هو نموذج افتراضي يوضع', description: 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت ' },
-    ]
     return (
         <div className="container2 mx-auto lg:mt-[6rem] mt-[3rem]">
             <div className="flex justify-center flex-col items-center text-center">

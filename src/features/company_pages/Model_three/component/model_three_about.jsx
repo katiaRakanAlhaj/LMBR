@@ -1,5 +1,6 @@
 import ModelThreeTitle from "../../../../component/ui/model_three_title";
 import  DOMPurify  from 'dompurify';
+import i18n from "../../../../i18n";
 const ModelThreeAbout = ({ singleCompanyData }) => {
   return (
     <div className="container7 mx-auto mt-[8rem]">
@@ -15,7 +16,7 @@ const ModelThreeAbout = ({ singleCompanyData }) => {
         </div>
         {/* Content column */}
         <div className="lg:col-span-8 col-span-full flex flex-col justify-center">
-          <ModelThreeTitle title={"حول الشركة"} />
+          <ModelThreeTitle title={i18n.t("About the Company")} />
           <p
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(singleCompanyData?.about_description),

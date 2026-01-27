@@ -1,3 +1,4 @@
+import ScrollToTop from "../../component/ScrollToTop/ScrollToTop";
 import ModelTwoAbout from "../../features/company_pages/Model_two/component/model_two_about";
 import ModelTwoBanner from "../../features/company_pages/Model_two/component/model_two_banner";
 import ModelTwoBannerMobile from "../../features/company_pages/Model_two/component/model_two_banner_mobile";
@@ -8,6 +9,7 @@ import ModelOneUploadFile from './../../features/company_pages/Model_one/compone
 const ModelTwo = ({singleCompanyData})=> {
     return(
         <div>
+            <ScrollToTop/>
             <div className="lg:block hidden">
                 <ModelTwoBanner singleCompanyData = {singleCompanyData}/>
             </div>

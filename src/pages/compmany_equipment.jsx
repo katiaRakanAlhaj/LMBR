@@ -1,3 +1,4 @@
+import ScrollToTop from "../component/ScrollToTop/ScrollToTop";
 import CompanyEquipmentGrid from "../features/company_equipment/component/company_equipment_grid";
 import CompanyEquipmentGridMobile from "../features/company_equipment/component/company_equipment_grid_mobile";
 import CompanyEquipmentImage from "../features/company_equipment/component/company_equipment_image";
@@ -7,6 +8,7 @@ const CompanyEquipment = ()=> {
     const {data:companyEquipmentData , isLoading:companyEquipmentDataLoading , error:companyEquipmentDataError} = useFetchCompanyEquipment();
     return(
         <div>
+            <ScrollToTop/>
             <CompanyEquipmentImage companyEquipmentData = {companyEquipmentData}/>
             <div className="lg:block hidden">
                 <CompanyEquipmentGrid companyEquipmentData = {companyEquipmentData}/>

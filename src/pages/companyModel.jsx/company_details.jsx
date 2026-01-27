@@ -13,14 +13,6 @@ const CompanyDetails = () => {
     error: singleCompanyDataError,
   } = useFetchSingleCompany(id);
 
-  // ✅ WAIT for data
-  if (singleCompanyDataLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (singleCompanyDataError) {
-    return <div>Error loading company</div>;
-  }
 
   if (!singleCompanyData) {
     return null;
