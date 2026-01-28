@@ -3,6 +3,8 @@ import { useFetchSingleCompany } from "../../features/company_pages/hook/use_fet
 import ModelOne from "./model_one";
 import ModelTwo from "./model_two";
 import ModelThree from "./model_three";
+import Loader from "../../component/loader/loader";
+import ErrorMessageNetwork from "../../component/errorMessage/errorMessage";
 
 const CompanyDetails = () => {
   const { id } = useParams();
@@ -13,7 +15,12 @@ const CompanyDetails = () => {
     error: singleCompanyDataError,
   } = useFetchSingleCompany(id);
 
-
+  if (singleCompanyDataLoading) {
+    return <Loader />;
+  }
+  if (singleCompanyDataError) {
+    return <ErrorMessageNetwork />;
+  }
   if (!singleCompanyData) {
     return null;
   }

@@ -11,6 +11,10 @@ import { useFetchContactPage } from "../features/contact/hook/use_fetch_contact_
 import Partners from "../features/home/component/partners";
 import { useFetchProjects } from "../features/home/hook/use_fetch_projects";
 import ScrollToTop from "../component/ScrollToTop/ScrollToTop";
+import { HelmetProvider } from "react-helmet-async";
+import MetaHelmet from "../component/meta/metaHelmet";
+import Loader from "./../component/loader/loader";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 const Home = () => {
   const {
     data: homePageData,
@@ -42,19 +46,45 @@ const Home = () => {
     isLoading: projectsDataLoading,
     error: projectsDataError,
   } = useFetchProjects();
+  const combinedLoader =
+    homePageDataLoading ||
+    sliderDataLoading ||
+    servicesDataLoading ||
+    aboutDataLoading ||
+    contactDataLoading ||
+    projectsDataLoading;
+  const combinedError =
+    homePageDataError ||
+    sliderDataError ||
+    servicesDataError ||
+    aboutDataError ||
+    contactDataError ||
+    projectsDataError;
+  if (combinedError) {
+    return <ErrorMessageNetwork />;
+  }
+  if (combinedLoader) {
+    return <Loader />;
+  }
   return (
     <div>
-      <ScrollToTop/>
-      <ImageHome sliderData={sliderData} />
-      <About aboutData={aboutData} />
-      <Services homePageData={homePageData} servicesData={servicesData} />
-      <Projects homePageData={homePageData} projectsData = {projectsData}/>
-      <Partners homePageData={homePageData} />
-      <Contact
-        contactData={contactData}
-        marginClass="lg:mt-[6rem] mt-[2rem]"
-        containerClass="container4"
-      />
+      <ScrollToTop />
+      <HelmetProvider>
+        <MetaHelmet
+          title={homePageData?.data.meta_title}
+          description={homePageData?.data.meta_description}
+        />
+        <ImageHome sliderData={sliderData} />
+        <About aboutData={aboutData} />
+        <Services homePageData={homePageData} servicesData={servicesData} />
+        <Projects homePageData={homePageData} projectsData={projectsData} />
+        <Partners homePageData={homePageData} />
+        <Contact
+          contactData={contactData}
+          marginClass="lg:mt-[6rem] mt-[2rem]"
+          containerClass="container4"
+        />
+      </HelmetProvider>
     </div>
   );
 };

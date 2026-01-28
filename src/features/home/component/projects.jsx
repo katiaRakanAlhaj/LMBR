@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Title from "../../../component/ui/title";
-import { CgArrowLeft } from "react-icons/cg";
+import { CgArrowLeft, CgArrowRight } from "react-icons/cg";
 import DOMPurify from "dompurify";
 
 // Import Swiper styles
@@ -153,10 +153,10 @@ const Projects = ({ homePageData, projectsData }) => {
           {/* Custom Navigation Buttons */}
           <div
             onClick={() => swiperRef.current.swiper.slidePrev()}
-            className="flex justify-center items-center absolute -left-[3rem] cursor-pointer top-1/3 mt-[2rem] w-[2.5rem] h-[2.5rem] rounded-full bg-white"
+            className={`lg:flex hidden justify-center items-center absolute ${i18n.language == "ar" ? "-left-[3rem]" : "-right-[3rem]"} cursor-pointer top-1/3 mt-[2rem] w-[2.5rem] h-[2.5rem] rounded-full bg-white`}
           >
             <icon className="text-[1.5rem] text-primary">
-              <CgArrowLeft />
+              {i18n.language == "ar" ? <CgArrowLeft /> : <CgArrowRight />}
             </icon>
           </div>
         </div>
