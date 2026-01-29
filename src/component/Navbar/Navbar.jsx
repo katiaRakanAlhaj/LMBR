@@ -82,27 +82,38 @@ const Navbar = ({ contactData, servicesData, companyData }) => {
   }, [id, location.pathname, companyData]);
 
   const handleLanguageChange = (newLang) => {
-    const currentPath = location.pathname;
+    const currentPath = window.location.pathname;
     
-    // Replace the language segment in the URL
-    const newPath = currentPath.replace(/^\/(en|ar)/, `/${newLang}`);
+    // Extract everything after the language prefix
+    const match = currentPath.match(/^\/(en|ar)(\/.*)?$/);
     
-    // If no language prefix exists, add it
-    if (!/^\/(en|ar)/.test(currentPath)) {
-      navigate(`/${newLang}${currentPath}`);
+    if (match) {
+      // We have a language in the URL
+      const currentLang = match[1];
+      const restOfPath = match[2] || '';
+      
+      // Build new path with new language
+      const newPath = `/${newLang}${restOfPath}`;
+      
+      // Update language in state and storage
+      i18n.changeLanguage(newLang);
+      setLanguage(newLang);
+      localStorage.setItem("language", newLang);
+      
+      // Navigate to new URL
+      window.location.href = newPath;
     } else {
-      navigate(newPath);
+      // No language in URL (shouldn't happen, but handle it)
+      const newPath = `/${newLang}`;
+      
+      // Update language in state and storage
+      i18n.changeLanguage(newLang);
+      setLanguage(newLang);
+      localStorage.setItem("language", newLang);
+      
+      // Navigate to new URL
+      window.location.href = newPath;
     }
-    
-    // Save language preference
-    localStorage.setItem("language", newLang);
-    setLanguage(newLang);
-    i18n.changeLanguage(newLang);
-    
-    // Reload the page after a short delay
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
   };
 
   const handleServicesMouseEnter = () => {
@@ -138,7 +149,8 @@ const Navbar = ({ contactData, servicesData, companyData }) => {
 
   const handleLogoClick = () => {
     if (!isCompanyPage) {
-      navigate(createPath(""));
+      const currentLang = getCurrentLang();
+      navigate(`/${currentLang}`);
     }
   };
 

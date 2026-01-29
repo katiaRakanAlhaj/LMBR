@@ -166,27 +166,39 @@ const NavbarMobile = ({ servicesData, companyData }) => {
     }
   };
 
-  const handleLanguageChange = () => {
-    const newLang = getCurrentLang() === "en" ? "ar" : "en";
-    const currentPath = location.pathname;
+  const handleLanguageChange = (newLang) => {
+    const currentPath = window.location.pathname;
     
-    // Replace the language segment in the URL
-    let newPath = currentPath.replace(/^\/(en|ar)/, `/${newLang}`);
+    // Extract everything after the language prefix
+    const match = currentPath.match(/^\/(en|ar)(\/.*)?$/);
     
-    // If no language prefix exists, add it
-    if (!/^\/(en|ar)/.test(currentPath)) {
-      newPath = `/${newLang}${currentPath}`;
-    }
-    
-    // Save language preference
-    localStorage.setItem("language", newLang);
-    setLanguage(newLang);
-    i18n.changeLanguage(newLang);
-    
-    // Navigate and reload
-    setTimeout(() => {
+    if (match) {
+      // We have a language in the URL
+      const currentLang = match[1];
+      const restOfPath = match[2] || '';
+      
+      // Build new path with new language
+      const newPath = `/${newLang}${restOfPath}`;
+      
+      // Update language in state and storage
+      i18n.changeLanguage(newLang);
+      setLanguage(newLang);
+      localStorage.setItem("language", newLang);
+      
+      // Navigate to new URL
       window.location.href = newPath;
-    }, 100);
+    } else {
+      // No language in URL (shouldn't happen, but handle it)
+      const newPath = `/${newLang}`;
+      
+      // Update language in state and storage
+      i18n.changeLanguage(newLang);
+      setLanguage(newLang);
+      localStorage.setItem("language", newLang);
+      
+      // Navigate to new URL
+      window.location.href = newPath;
+    }
   };
 
   const renderDropdownItems = (items, isService = false) => {
@@ -270,14 +282,14 @@ const NavbarMobile = ({ servicesData, companyData }) => {
           <div className="flex gap-x-2 text-white text-sm cursor-pointer">
             <span
               className={`${currentLang === "en" ? "font-bold text-[#263F57]" : "hover:text-[#263F57] transition-colors duration-200"}`}
-              onClick={handleLanguageChange}
+              onClick={() => handleLanguageChange("en")}
             >
               EN
             </span>
             <span>|</span>
             <span
               className={`${currentLang === "ar" ? "font-bold text-[#263F57]" : "hover:text-[#263F57] transition-colors duration-200"}`}
-              onClick={handleLanguageChange}
+              onClick={() => handleLanguageChange("ar")}
             >
               AR
             </span>
