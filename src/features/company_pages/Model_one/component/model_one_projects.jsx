@@ -27,7 +27,7 @@ const ModelOneProjects = ({ singleCompanyData }) => {
       {/* Grid */}
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[1rem]">
         {singleCompanyData?.projects?.map((item) => (
-          <Link to={`/project/${item.id}`} key={item.id}>
+<Link to={`/${i18next.language || 'ar'}/project/${item.id}`} key={item.id}>
             <div className="lg:h-[27rem] h-[20rem] rounded-md relative overflow-hidden group cursor-pointer">
               {/* Image */}
               <img src={item.image} className="w-full h-full object-cover" />

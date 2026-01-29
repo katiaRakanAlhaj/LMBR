@@ -8,13 +8,23 @@ const resources = {
     ar: { translation: arJSON }
 };
 
-// Default to Arabic if no language is stored
-const language = localStorage.getItem("language") || "ar";
+// Get language from URL first, then localStorage
+const getInitialLanguage = () => {
+  // Try to get from URL
+  const path = window.location.pathname;
+  const langMatch = path.match(/^\/(en|ar)(\/|$)/);
+  if (langMatch) return langMatch[1];
+  
+  // Fallback to localStorage
+  return localStorage.getItem("language") || "ar";
+};
+
+const language = getInitialLanguage();
 
 i18n
   .use(initReactI18next)
   .init({
-      fallbackLng: "ar", // fallback also set to Arabic
+      fallbackLng: "ar",
       debug: true,
       resources: { ...resources },
       interpolation: {

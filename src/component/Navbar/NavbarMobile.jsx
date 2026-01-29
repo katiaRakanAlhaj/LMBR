@@ -11,6 +11,7 @@ import i18n from "../../i18n";
 const NavbarMobile = ({ servicesData, companyData }) => {
   const { t } = useTranslation();
   const { language, setLanguage } = useContext(MyContext);
+  const { lang } = useParams(); // Get language from URL params
 
   const [currentLogo, setCurrentLogo] = useState(logo);
   const [companyName, setCompanyName] = useState("");
@@ -25,42 +26,59 @@ const NavbarMobile = ({ servicesData, companyData }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { id } = useParams(); // Get company ID from route params
+  const { id } = useParams();
 
   const currentPath = location.pathname;
 
+  // Helper function to get current language from URL or context
+  const getCurrentLang = () => {
+    return lang || language || "ar";
+  };
+
+  // Helper function to create paths with language prefix
+  const createPath = (path) => {
+    const currentLang = getCurrentLang();
+    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+    return `/${currentLang}/${cleanPath}`;
+  };
+
+  // Update language based on URL
+  useEffect(() => {
+    if (lang && lang !== language) {
+      i18n.changeLanguage(lang);
+      setLanguage(lang);
+      localStorage.setItem("language", lang);
+    }
+  }, [lang, language, setLanguage]);
+
   // Effect to update logo and company name based on route
   useEffect(() => {
-    // Check if we're on a company detail page
-    const companyPageCheck = location.pathname.startsWith("/company/");
+    const companyPageCheck = location.pathname.includes("/company/") && id;
     setIsCompanyPage(companyPageCheck);
 
     if (companyPageCheck && id && companyData?.data) {
-      // Find the company by ID
       const currentCompany = companyData.data.find(
         (company) => company.id.toString() === id,
       );
 
       if (currentCompany) {
-        // Use company logo if found
         setCurrentLogo(currentCompany.logo);
         setCompanyName(currentCompany.name);
       } else {
-        // Fallback to default logo
         setCurrentLogo(logo);
         setCompanyName("");
       }
     } else {
-      // For all other pages, use default logo
       setCurrentLogo(logo);
       setCompanyName("");
     }
   }, [id, location.pathname, companyData]);
 
+  // Create navigation items with language prefixes
   const aboutItems = [
-    { title: t("about_us"), path: "/about" },
-    { title: t("vision_and_mission"), path: "/vission" },
-    { title: t("goals"), path: "/goals" },
+    { title: t("about_us"), path: createPath("about") },
+    { title: t("vision_and_mission"), path: createPath("vission") },
+    { title: t("goals"), path: createPath("goals") },
   ];
 
   // Use dynamic company items from API
@@ -68,18 +86,18 @@ const NavbarMobile = ({ servicesData, companyData }) => {
     companyData?.data?.map((company) => ({
       id: company.id,
       title: company.name,
-      path: `/company/${company.id}`,
+      path: createPath(`company/${company.id}`),
     })) || [];
 
   const servicesItems =
     servicesData?.data?.map((service) => ({
       id: service.id,
       title: service.title,
-      path: `/service/${service.id}`,
+      path: createPath(`service/${service.id}`),
     })) || [];
 
   const navItems = [
-    { path: "/", label: t("home") },
+    { path: createPath(""), label: t("home") },
     {
       label: t("about_us"),
       hasDropdown: true,
@@ -98,10 +116,10 @@ const NavbarMobile = ({ servicesData, companyData }) => {
       key: "services",
       items: servicesItems,
     },
-    { path: "/certificates", label: t("certificates") },
-    { path: "/company_equipment", label: t("company_equipment") },
-    { path: "/health_and_safety", label: t("health_and_safety") },
-    { path: "/contact", label: t("contact_us") },
+    { path: createPath("certificates"), label: t("certificates") },
+    { path: createPath("company_equipment"), label: t("company_equipment") },
+    { path: createPath("health_and_safety"), label: t("health_and_safety") },
+    { path: createPath("contact"), label: t("contact_us") },
   ];
 
   const toggleMobileMenu = () => {
@@ -140,25 +158,35 @@ const NavbarMobile = ({ servicesData, companyData }) => {
     return () => document.body.classList.remove("overflow-hidden");
   }, [isMobileMenuOpen]);
 
-  const handleNavigate = () => {
-    navigate("/");
-    setIsMobileMenuOpen(false);
+  const handleLogoClick = () => {
+    // Only navigate to home if we're NOT on a company page
+    if (!isCompanyPage) {
+      navigate(createPath(""));
+      setIsMobileMenuOpen(false);
+    }
   };
 
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem("language") || "en";
-    setLanguage(storedLanguage);
-    i18next.changeLanguage(storedLanguage);
-  }, [setLanguage]);
-
-  const handleChange = () => {
-    const newLang = language === "en" ? "ar" : "en";
-    i18n.changeLanguage(newLang);
+  const handleLanguageChange = () => {
+    const newLang = getCurrentLang() === "en" ? "ar" : "en";
+    const currentPath = location.pathname;
+    
+    // Replace the language segment in the URL
+    let newPath = currentPath.replace(/^\/(en|ar)/, `/${newLang}`);
+    
+    // If no language prefix exists, add it
+    if (!/^\/(en|ar)/.test(currentPath)) {
+      newPath = `/${newLang}${currentPath}`;
+    }
+    
+    // Save language preference
     localStorage.setItem("language", newLang);
     setLanguage(newLang);
+    i18n.changeLanguage(newLang);
+    
+    // Navigate and reload
     setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+      window.location.href = newPath;
+    }, 100);
   };
 
   const renderDropdownItems = (items, isService = false) => {
@@ -205,26 +233,24 @@ const NavbarMobile = ({ servicesData, companyData }) => {
 
     // Default logo for non-company pages
     return (
-      <img
-        onClick={handleNavigate}
-        src={currentLogo}
-        alt="Logo"
-        className="h-10 w-auto object-cover cursor-pointer"
-        onError={(e) => {
-          e.target.src = logo;
-          setCurrentLogo(logo);
-        }}
-      />
+      <div
+        onClick={handleLogoClick}
+        className={`h-10 w-auto ${!isCompanyPage ? "cursor-pointer hover:opacity-90 transition-opacity" : "cursor-default"}`}
+      >
+        <img
+          src={currentLogo}
+          alt="Logo"
+          className="h-full w-full object-cover"
+          onError={(e) => {
+            e.target.src = logo;
+            setCurrentLogo(logo);
+          }}
+        />
+      </div>
     );
   };
-  const handleLogoClick = () => {
-    // Only navigate to home if we're NOT on a company page
-    if (!isCompanyPage) {
-      navigate("/");
-      setIsMobileMenuOpen(false);
-    }
-    // If isCompanyPage is true, do nothing (prevent navigation)
-  };
+
+  const currentLang = getCurrentLang();
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full">
@@ -243,15 +269,15 @@ const NavbarMobile = ({ servicesData, companyData }) => {
           {/* Language Switcher */}
           <div className="flex gap-x-2 text-white text-sm cursor-pointer">
             <span
-              className={`${language === "en" ? "font-bold text-[#263F57]" : ""}`}
-              onClick={handleChange}
+              className={`${currentLang === "en" ? "font-bold text-[#263F57]" : "hover:text-[#263F57] transition-colors duration-200"}`}
+              onClick={handleLanguageChange}
             >
               EN
             </span>
             <span>|</span>
             <span
-              className={`${language === "ar" ? "font-bold text-[#263F57]" : ""}`}
-              onClick={handleChange}
+              className={`${currentLang === "ar" ? "font-bold text-[#263F57]" : "hover:text-[#263F57] transition-colors duration-200"}`}
+              onClick={handleLanguageChange}
             >
               AR
             </span>
@@ -290,7 +316,7 @@ const NavbarMobile = ({ servicesData, companyData }) => {
                     onClick={() => toggleDropdown(item.key)}
                   >
                     <span>{item.label}</span>
-                    {i18next.language === "ar" ? (
+                    {currentLang === "ar" ? (
                       <MdArrowBackIos
                         className={`text-white text-[0.9rem] transition-transform duration-300 ${
                           expandedSections[item.key] ? "rotate-90" : "rotate-0"

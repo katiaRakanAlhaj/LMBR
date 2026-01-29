@@ -91,12 +91,11 @@ const Projects = ({ homePageData, projectsData }) => {
             >
               {projectsData?.data?.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <Link to={`/project/${item.id}`}>
+                  <Link to={`/${i18next.language || "ar"}/project/${item.id}`}>
                     <div className="lg:h-[25rem] h-[20rem] rounded-lg relative overflow-hidden group cursor-pointer">
                       <img
                         src={item.image}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        alt={`Project ${item.id}`}
                       />
 
                       {/* Always visible gradient (transparent) */}

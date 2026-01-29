@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import i18n from "../../i18n";
 import { MyContext } from "../store";
-import logo from "../../assets/images/logo.png"; // Default logo
+import logo from "../../assets/images/logo.png";
 import i18next from "i18next";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import DropdownMenu from "./dropdownMenu";
@@ -10,71 +10,99 @@ import SocialIcons from "./socialIcons";
 import NavLink from "./NavLink";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
-const Navbar = ({contactData , servicesData , companyData}) => {
+const Navbar = ({ contactData, servicesData, companyData }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { lang } = useParams();
   const { language, setLanguage } = useContext(MyContext);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isCompaniesDropdownOpen, setIsCompaniesDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [currentLogo, setCurrentLogo] = useState(logo);
-  const [companyName, setCompanyName] = useState(""); // State for company name
-  const [isCompanyPage, setIsCompanyPage] = useState(false); // State to track if on company page
+  const [companyName, setCompanyName] = useState("");
+  const [isCompanyPage, setIsCompanyPage] = useState(false);
 
   const { id } = useParams();
-  const location = useLocation();
   const navbarRef = useRef(null);
   const servicesMenuRef = useRef(null);
 
+  // Helper function to get current language from URL or context
+  const getCurrentLang = () => {
+    return lang || language || "ar";
+  };
+
+  // Helper function to create paths with language prefix
+  const createPath = (path) => {
+    const currentLang = getCurrentLang();
+    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+    return `/${currentLang}/${cleanPath}`;
+  };
+
   const aboutItems = [
-    { title: i18next.t("about_us"), path: '/about' },
-    { title: i18next.t("vision_and_mission"), path: '/vission' },
-    { title: i18next.t("goals"), path: '/goals' },
+    { title: i18next.t("about_us"), path: createPath("about") },
+    { title: i18next.t("vision_and_mission"), path: createPath("vission") },
+    { title: i18next.t("goals"), path: createPath("goals") },
   ];
 
   const companyItems = companyData?.data?.map((company) => ({
     title: company.name,
-    path: `/company/${company.id}`,
+    path: createPath(`company/${company.id}`),
   }));
 
+  // Update language based on URL
   useEffect(() => {
-    const storedLanguage = localStorage.getItem("language") || "ar";
-    setLanguage(storedLanguage);
-    i18n.changeLanguage(storedLanguage);
-  }, [setLanguage]);
+    if (lang && lang !== language) {
+      i18n.changeLanguage(lang);
+      setLanguage(lang);
+      localStorage.setItem("language", lang);
+    }
+  }, [lang, language, setLanguage]);
 
   // Effect to update logo and company name based on route
   useEffect(() => {
-    // Check if we're on a company detail page
-    const companyPageCheck = location.pathname.startsWith('/company/');
+    const companyPageCheck = location.pathname.includes("/company/") && id;
     setIsCompanyPage(companyPageCheck);
-    
+
     if (companyPageCheck && id && companyData?.data) {
-      // Find the company by ID
-      const currentCompany = companyData.data.find(company => company.id.toString() === id);
-      
+      const currentCompany = companyData.data.find(
+        (company) => company.id.toString() === id
+      );
+
       if (currentCompany) {
-        // Use company logo if found
         setCurrentLogo(currentCompany.logo);
         setCompanyName(currentCompany.name);
       } else {
-        // Fallback to default logo
         setCurrentLogo(logo);
         setCompanyName("");
       }
     } else {
-      // For all other pages, use default logo
       setCurrentLogo(logo);
       setCompanyName("");
     }
   }, [id, location.pathname, companyData]);
 
-  const handleChange = (lang) => {
-    i18n.changeLanguage(lang);
-    localStorage.setItem("language", lang);
-    setLanguage(lang);
+  const handleLanguageChange = (newLang) => {
+    const currentPath = location.pathname;
+    
+    // Replace the language segment in the URL
+    const newPath = currentPath.replace(/^\/(en|ar)/, `/${newLang}`);
+    
+    // If no language prefix exists, add it
+    if (!/^\/(en|ar)/.test(currentPath)) {
+      navigate(`/${newLang}${currentPath}`);
+    } else {
+      navigate(newPath);
+    }
+    
+    // Save language preference
+    localStorage.setItem("language", newLang);
+    setLanguage(newLang);
+    i18n.changeLanguage(newLang);
+    
+    // Reload the page after a short delay
     setTimeout(() => {
       window.location.reload();
-    }, 300);
+    }, 100);
   };
 
   const handleServicesMouseEnter = () => {
@@ -107,13 +135,15 @@ const Navbar = ({contactData , servicesData , companyData}) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const handleLogoClick = () => {
-    // Only navigate to home if we're NOT on a company page
     if (!isCompanyPage) {
-      navigate("/");
+      navigate(createPath(""));
     }
-    // If isCompanyPage is true, do nothing (prevent navigation)
   };
+
+  const currentLang = getCurrentLang();
+
   return (
     <div ref={navbarRef} className="relative">
       {/* Fixed Navbar */}
@@ -125,17 +155,16 @@ const Navbar = ({contactData , servicesData , companyData}) => {
         {/* Logo and Company Name Container */}
         <div className="flex items-center gap-x-6">
           {/* Dynamic logo with conditional size */}
-              <div 
-            className={`mt-[-3rem] ${isCompanyPage ? 'w-[16rem] h-[5rem] mr-4' : 'w-[10rem]'} 
-                       ${!isCompanyPage ? 'cursor-pointer hover:opacity-90 transition-opacity' : 'cursor-default'}`}
+          <div
+            className={`mt-[-3rem] ${isCompanyPage ? "w-[16rem] h-[5rem] mr-4" : "w-[10rem]"} 
+                       ${!isCompanyPage ? "cursor-pointer hover:opacity-90 transition-opacity" : "cursor-default"}`}
             onClick={handleLogoClick}
           >
-            <img 
-              className="w-full h-full" 
-              src={currentLogo} 
-              alt="Logo" 
+            <img
+              className="w-full h-full"
+              src={currentLogo}
+              alt="Logo"
               onError={(e) => {
-                // Fallback to default logo if company logo fails to load
                 e.target.src = logo;
                 setCurrentLogo(logo);
               }}
@@ -146,30 +175,34 @@ const Navbar = ({contactData , servicesData , companyData}) => {
             <div className="flex flex-col justify-center mt-[-3rem]">
               <h1 className="text-white text-3xl font-bold leading-tight">
                 {companyName}
-              </h1>              
+              </h1>
             </div>
           )}
         </div>
-        
-        <SocialIcons contactData={contactData}/>
+
+        <SocialIcons contactData={contactData} />
 
         {/* Language Switcher */}
-        <div className={`absolute bottom-[0.6rem] ${i18next.language == "ar" ? 'left-[3.5rem]' : 'left-[3.5rem]'} flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50`}>
+        <div
+          className={`absolute bottom-[0.6rem] ${
+            currentLang === "ar" ? "left-[3.5rem]" : "left-[3.5rem]"
+          } flex gap-x-2 text-white text-[1.1rem] cursor-pointer z-50`}
+        >
           <span
-            className={`${language === "en" ? "font-bold text-[#263F57]" : ""}`}
-            onClick={() => handleChange("en")}
+            className={`${currentLang === "en" ? "font-bold text-[#263F57]" : ""} hover:text-[#263F57] transition-colors duration-200`}
+            onClick={() => handleLanguageChange("en")}
           >
             EN
           </span>
           <span>|</span>
           <span
-            className={`${language === "ar" ? "font-bold text-[#263F57]" : ""}`}
-            onClick={() => handleChange("ar")}
+            className={`${currentLang === "ar" ? "font-bold text-[#263F57]" : ""} hover:text-[#263F57] transition-colors duration-200`}
+            onClick={() => handleLanguageChange("ar")}
           >
             AR
           </span>
         </div>
-        
+
         {/* Navbar Links */}
         <div
           className="absolute right-0 bottom-0 h-[3.5rem] w-full border-t border-t-white"
@@ -179,7 +212,7 @@ const Navbar = ({contactData , servicesData , companyData}) => {
           }}
         >
           <div className="container1 mx-auto mt-[1rem] flex gap-x-[4rem] relative">
-            <NavLink title={i18next.t("home")} path="/" />
+            <NavLink title={i18next.t("home")} path={createPath("")} />
 
             <DropdownMenu
               title={i18next.t("about_us")}
@@ -200,32 +233,48 @@ const Navbar = ({contactData , servicesData , companyData}) => {
             <div
               className="relative"
               onMouseEnter={handleServicesMouseEnter}
-              onMouseLeave={() => { }}
+              onMouseLeave={() => {}}
             >
               <div className="flex gap-x-2 items-center cursor-pointer">
-                <p className="text-white text-[1.1rem]">{i18next.t("services")}</p>
-                {i18next.language == "ar" ? (
+                <p className="text-white text-[1.1rem]">
+                  {i18next.t("services")}
+                </p>
+                {currentLang === "ar" ? (
                   <MdArrowBackIos
-                    className={`text-white text-[0.9rem] transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-90" : "rotate-0"
-                      }`}
+                    className={`text-white text-[0.9rem] transition-transform duration-300 ${
+                      isServicesDropdownOpen ? "rotate-90" : "rotate-0"
+                    }`}
                   />
                 ) : (
                   <MdArrowForwardIos
-                    className={`text-white text-[0.9rem] transition-transform duration-300 ${isServicesDropdownOpen ? "-rotate-90" : "rotate-0"
-                      }`}
+                    className={`text-white text-[0.9rem] transition-transform duration-300 ${
+                      isServicesDropdownOpen ? "-rotate-90" : "rotate-0"
+                    }`}
                   />
                 )}
               </div>
             </div>
 
-            <NavLink title={i18next.t("certificates")} path="/certificates" />
-            <NavLink title={i18next.t("company_equipment")} path="/company_equipment"/>
-            <NavLink title={i18next.t("health_and_safety")} path="/health_and_safety"/>
-            <NavLink title={i18next.t("contact_us")} path="/contact"/>
+            <NavLink
+              title={i18next.t("certificates")}
+              path={createPath("certificates")}
+            />
+            <NavLink
+              title={i18next.t("company_equipment")}
+              path={createPath("company_equipment")}
+            />
+            <NavLink
+              title={i18next.t("health_and_safety")}
+              path={createPath("health_and_safety")}
+            />
+            <NavLink
+              title={i18next.t("contact_us")}
+              path={createPath("contact")}
+            />
           </div>
         </div>
       </div>
-      
+
       {/* Services Dropdown */}
       {isServicesDropdownOpen && (
         <div
@@ -237,6 +286,7 @@ const Navbar = ({contactData , servicesData , companyData}) => {
             ref={servicesMenuRef}
             servicesData={servicesData}
             isOpen={isServicesDropdownOpen}
+            currentLang={currentLang}
           />
         </div>
       )}

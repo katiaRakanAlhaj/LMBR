@@ -4,10 +4,11 @@ import { GoArrowUpLeft, GoArrowUpRight } from "react-icons/go";
 import i18next from "i18next";
 import DOMPurify from "dompurify";
 import i18n from "./../../../i18n";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Services = ({ homePageData, servicesData }) => {
   const navigate = useNavigate();
+  const { lang } = useParams();
   const sectionRef = useRef(null);
   const isRTL = i18next.language === "ar";
   const [isVisible, setIsVisible] = useState(false);
@@ -22,8 +23,8 @@ const Services = ({ homePageData, servicesData }) => {
       const apiItems = servicesData.data.map((service) => {
         return {
           id: service.id,
-          image: service.icon,    // الأيقونة الأساسية من API
-          image2: service.icon2,  // الأيقونة الثانية (icon2) من API
+          image: service.icon, // الأيقونة الأساسية من API
+          image2: service.icon2, // الأيقونة الثانية (icon2) من API
           title: service.title || "",
           description: service.description || "",
           rawDescription: service.description, // حفظ الوصف الأصلي للاستخدام
@@ -173,7 +174,11 @@ const Services = ({ homePageData, servicesData }) => {
 
                 return (
                   <div
-                    onClick={() => navigate(`/service/${item.id}`)}
+                    onClick={() =>
+                      navigate(
+                        `/${lang || i18next.language || "ar"}/service/${item.id}`,
+                      )
+                    }
                     className="rounded-3xl group/card cursor-pointer"
                     key={`${item.id}-${rowIndex}-${itemIndex}`}
                     style={{

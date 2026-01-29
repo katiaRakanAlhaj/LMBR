@@ -1,11 +1,18 @@
 import React, { forwardRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
+  const { lang } = useParams();
+  
   if (!isOpen) return null;
 
   // Safety check
   if (!servicesData || !servicesData.data) return null;
+
+  // Helper function to create service path with language prefix
+  const createServicePath = (serviceId) => {
+    return `/${lang || 'ar'}/service/${serviceId}`;
+  };
 
   return (
     <div
@@ -20,7 +27,7 @@ const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
         {servicesData.data.map((service) => (
           <Link
             key={service.id}
-            to={`/service/${service.id}`}
+            to={createServicePath(service.id)}
             className="border border-white/30 text-white text-[1.1rem]
                        hover:bg-[#263F57] transition-colors
                        flex items-center justify-center min-h-[4rem] px-4"

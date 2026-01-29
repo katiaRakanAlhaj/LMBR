@@ -19,7 +19,7 @@ const ModelTwoProjects = ({ singleCompanyData }) => {
       {/* Grid */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-[3rem] gap-[2rem] mt-[2rem]">
         {singleCompanyData?.projects?.map((item) => (
-          <Link to={`/project/${item.id}`} key={item.id}>
+<Link to={`/${i18next.language || 'ar'}/project/${item.id}`} key={item.id}>
             <div className="h-[21rem] rounded-3xl relative overflow-hidden group cursor-pointer">
               {/* Image */}
               <img src={item.image} className="w-full h-full object-cover" />
