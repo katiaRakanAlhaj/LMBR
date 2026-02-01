@@ -16,7 +16,7 @@ const AboutFourthSection = ({ aboutData }) => {
                 </div>
                 {/* second column */}
                 <div className="flex flex-col justify-center">
-                    <h1 className="lg:text-[2rem] text-[1.5rem] font-bold text-[#333333]">{aboutData?.data?.forth_section_title}</h1>
+                    <h1 className="lg:text-[1.5rem] text-[1.5rem] font-bold text-[#333333]">{aboutData?.data?.forth_section_title}</h1>
                     <p dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(aboutData?.data?.forth_section_description)
                     }} className="text-[1.2rem] mt-3 text-[#333333] leading-[2rem]" />

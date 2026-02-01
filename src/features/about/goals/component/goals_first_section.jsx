@@ -30,7 +30,7 @@ const GoalsFirstSection = ({ goalsData }) => {
 
                             {/* Header */}
                             <div className="flex justify-between items-center">
-                                <h1 className="text-[4rem] font-bold text-secondary mb-[-2rem]">
+                                <h1 className="text-[1.8rem] font-bold text-secondary mb-[-2rem]">
                                     {item.title}
                                 </h1>
 

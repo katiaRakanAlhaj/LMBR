@@ -94,9 +94,6 @@ function App() {
             <Route path="service/:id" element={<SingleService />} />
             <Route path="project/:id" element={<SingleProject />} />
             <Route path="company_equipment" element={<CompanyEquipment />} />
-            <Route path="company1" element={<ModelOne />} />
-            <Route path="company2" element={<ModelTwo />} />
-            <Route path="company3" element={<ModelThree />} />
             <Route path="company/:id" element={<CompanyDetails />} />
           </Route>
         </Route>

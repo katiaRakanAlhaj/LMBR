@@ -39,7 +39,7 @@ const Projects = ({ homePageData, projectsData }) => {
 
   return (
     <div className="h-[46rem] w-full bg-[#063252] lg:mt-[2rem] mt-[2rem]">
-      <div className="flex flex-col justify-center items-center pt-[5rem]">
+      <div className="flex flex-col justify-center text-center items-center pt-[5rem]">
         <Title title={i18n.t("our_projects")} />
         <p
           dangerouslySetInnerHTML={{
@@ -47,7 +47,7 @@ const Projects = ({ homePageData, projectsData }) => {
               homePageData?.data?.projects_description,
             ),
           }}
-          className="text-white text-[1.2rem] mt-2"
+          className="text-white text-[1.2rem] mt-2 lg:w-[50%] mx-auto text-center"
         />
 
         <div className="mt-[4rem] container mx-auto w-full px-4 relative">
