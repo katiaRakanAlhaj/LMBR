@@ -56,16 +56,26 @@ const ModelOneBanner = ({ singleCompanyData }) => {
       </svg>
 
       {/* TITLE */}
-      <div
-        className="absolute top-1/2 left-1/2 
-        -translate-x-1/2 -translate-y-1/2 
-        font-bold text-white text-nowrap
+      <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <h1
+          className=" 
+        font-bold text-white text-center text-nowrap
         lg:text-[2.3rem] text-[1.5rem] 
         z-10"
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(singleCompanyData?.description),
-        }}
-      ></div>
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(singleCompanyData?.title),
+          }}
+        ></h1>
+        <p
+          className=" 
+        text-white text-center text-nowrap
+        lg:text-[1.2rem]
+        z-10"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(singleCompanyData?.description),
+          }}
+        ></p>
+      </div>
 
       {/* SIDE IMAGE */}
       <div

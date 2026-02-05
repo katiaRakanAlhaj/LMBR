@@ -154,7 +154,7 @@ const DropdownMenu = ({
                   />
                   <RouterLink
                     to={item.path}
-                    className="relative z-10 flex flex-col items-center text-white text-[1.1rem] py-3 transition-colors duration-200"
+                    className="relative z-10 flex flex-col items-center text-center text-white text-[1.1rem] py-3 transition-colors duration-200"
                     onMouseEnter={() => handleItemMouseEnter(index)}
                     onMouseLeave={handleItemMouseLeave}
                   >

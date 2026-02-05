@@ -21,6 +21,7 @@ const Navbar = ({ contactData, servicesData, companyData }) => {
   const [currentLogo, setCurrentLogo] = useState(logo);
   const [companyName, setCompanyName] = useState("");
   const [isCompanyPage, setIsCompanyPage] = useState(false);
+  const [companyDescription, setCompanyDescription] = useState("");
 
   const { id } = useParams();
   const navbarRef = useRef(null);
@@ -46,6 +47,7 @@ const Navbar = ({ contactData, servicesData, companyData }) => {
 
   const companyItems = companyData?.data?.map((company) => ({
     title: company.name,
+    description: company.logo_description,
     path: createPath(`company/${company.id}`),
   }));
 
@@ -65,52 +67,57 @@ const Navbar = ({ contactData, servicesData, companyData }) => {
 
     if (companyPageCheck && id && companyData?.data) {
       const currentCompany = companyData.data.find(
-        (company) => company.id.toString() === id
+        (company) => company.id.toString() === id,
       );
 
       if (currentCompany) {
         setCurrentLogo(currentCompany.logo);
         setCompanyName(currentCompany.name);
+        setCompanyDescription(
+          currentCompany.description || currentCompany.logo_description || "",
+        ); // Add this line
       } else {
         setCurrentLogo(logo);
         setCompanyName("");
+        setCompanyDescription(""); // Reset description
       }
     } else {
       setCurrentLogo(logo);
       setCompanyName("");
+      setCompanyDescription(""); // Reset description
     }
   }, [id, location.pathname, companyData]);
 
   const handleLanguageChange = (newLang) => {
     const currentPath = window.location.pathname;
-    
+
     // Extract everything after the language prefix
     const match = currentPath.match(/^\/(en|ar)(\/.*)?$/);
-    
+
     if (match) {
       // We have a language in the URL
       const currentLang = match[1];
-      const restOfPath = match[2] || '';
-      
+      const restOfPath = match[2] || "";
+
       // Build new path with new language
       const newPath = `/${newLang}${restOfPath}`;
-      
+
       // Update language in state and storage
       i18n.changeLanguage(newLang);
       setLanguage(newLang);
       localStorage.setItem("language", newLang);
-      
+
       // Navigate to new URL
       window.location.href = newPath;
     } else {
       // No language in URL (shouldn't happen, but handle it)
       const newPath = `/${newLang}`;
-      
+
       // Update language in state and storage
       i18n.changeLanguage(newLang);
       setLanguage(newLang);
       localStorage.setItem("language", newLang);
-      
+
       // Navigate to new URL
       window.location.href = newPath;
     }
@@ -188,6 +195,9 @@ const Navbar = ({ contactData, servicesData, companyData }) => {
               <h1 className="text-white text-3xl font-bold leading-tight">
                 {companyName}
               </h1>
+              {companyDescription && (
+                <p className="text-white text-[1.2rem] mt-2">{companyDescription}</p>
+              )}
             </div>
           )}
         </div>

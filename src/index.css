@@ -11,34 +11,43 @@
     max-width: 88%;
     /* Prevent any overflow */
 }
+
 html::-webkit-scrollbar {
     display: none;
 }
-.container1{
+
+.container1 {
     max-width: 77%;
 }
+
 .container2 {
     max-width: 92%;
     /* Prevent any overflow */
 }
-.container3{
+
+.container3 {
     max-width: 80%;
 }
+
 .container4 {
     max-width: 84%;
     /* Prevent any overflow */
 }
+
 .container5 {
     max-width: 88%;
     /* Prevent any overflow */
 }
+
 .container6 {
     max-width: 55%;
     /* Prevent any overflow */
 }
-.container7{
+
+.container7 {
     max-width: 73%;
 }
+
 @media only screen and (max-width: 400px) {
     html {
         font-size: 14px;
@@ -176,23 +185,39 @@ html::-webkit-scrollbar {
         font-size: 45px;
     }
 }
+
+
 /* FF Shamel Family Sans One Book */
+
 @font-face {
-  font-family: "ShamelSansOne";
-  src: url("assets/fonts/FF Shamel Family Sans One Book.ttf") format("truetype");
-  font-weight: 400; /* normal */
-  font-style: normal;
+    font-family: "ShamelSansOne";
+    src: url("assets/fonts/FF Shamel Family Sans One Book.ttf") format("truetype");
+    font-weight: 400;
+    /* normal */
+    font-style: normal;
 }
+
 
 /* FF Shamel Family Sans One Bold */
+
 @font-face {
-  font-family: "ShamelSansOne";
-  src: url("assets/fonts/FF Shamel Family Sans One Bold.ttf") format("truetype");
-  font-weight: 700; /* bold */
-  font-style: normal;
+    font-family: "ShamelSansOne";
+    src: url("assets/fonts/FF Shamel Family Sans One Bold.ttf") format("truetype");
+    font-weight: 700;
+    /* bold */
+    font-style: normal;
 }
 
+
 /* Usage Example */
+
 body {
-  font-family: "ShamelSansOne", sans-serif;
+    font-family: "ShamelSansOne", sans-serif;
+}
+
+.line-clamp-13 {
+    display: -webkit-box;
+    -webkit-line-clamp: 13;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

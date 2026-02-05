@@ -54,7 +54,7 @@ const ModelThreeBanner = ({ singleCompanyData }) => {
           className={`absolute lg:block hidden ${i18n.language == "ar" ? "right-1/2" : "left-1/2"} mt-[-2.5rem] top-1/2`}
         >
           <h1 className="font-[700] text-white lg:text-[2.3rem] text-[1.8rem]">
-            {singleCompanyData?.name}
+            {singleCompanyData?.title}
           </h1>
           <p
             dangerouslySetInnerHTML={{

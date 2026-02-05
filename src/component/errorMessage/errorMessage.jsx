@@ -9,7 +9,7 @@ const ErrorMessageNetwork = () => {
     <div className="fixed inset-0 bg-white z-[9999] flex items-center justify-center text-center">
       <div>
         <p className="text-2xl font-bold text-[#333333]">
-          <icon className="flex justify-center text-4xl mb-[1rem] text-primary">
+          <icon className="flex justify-center text-4xl mb-[1rem] text-secondary">
             <SiOpslevel />
           </icon>
           {i18next.t('Oops')}
@@ -18,9 +18,9 @@ const ErrorMessageNetwork = () => {
           <br />
           <button
             onClick={handleRetry}
-            className="w-[7em] h-[3rem] bg-primary mt-[1rem] text-white rounded-lg"
+            className="w-auto px-4 h-[3rem] bg-secondary mt-[1rem] text-white rounded-lg"
           >
-           {i18next.t('Try again')}
+          <p className="text-[1.1rem] font-medium"> {i18next.t('Try again')}</p>
           </button>
         </p>
       </div>

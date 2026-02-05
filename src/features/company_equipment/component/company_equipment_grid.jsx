@@ -12,7 +12,7 @@ const CompanyEquipmentGrid = ({ companyEquipmentData }) => {
             <div className="container2 mx-auto mt-[4rem]">
                 <p dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(companyEquipmentData?.data?.description)
-                }} className="text-[#333333] text-center text-[1.1rem] leading-relaxed" />
+                }} className="text-[#333333] text-center text-[1.2rem] leading-relaxed" />
             </div>
 
             {/* Equipment Grid */}

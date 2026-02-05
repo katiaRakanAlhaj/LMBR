@@ -52,5 +52,7 @@
     "The page you're looking for has some errors. Please try again": "لايوجد اتصال بالشبكة نواجه حاليا بعض المشاكل يرجى المحاولة لاحقا",
     "Try again": "حاول مرة أخرى",
     "Oops": "عذرًا",
-    "vission_and_mission": "الرؤية والمهمة"
+    "vission_and_mission": "الرؤية والمهمة",
+    "show_more": "عرض المزيد",
+    "show_less": "عرض أقل"
 }

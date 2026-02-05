@@ -20,16 +20,19 @@ const Services = ({ homePageData, servicesData }) => {
   useEffect(() => {
     if (servicesData?.data && servicesData.data.length > 0) {
       // تحويل بيانات API إلى التنسيق المطلوب مع استخدام icon2 من API
-      const apiItems = servicesData.data.map((service) => {
-        return {
-          id: service.id,
-          image: service.icon, // الأيقونة الأساسية من API
-          image2: service.icon2, // الأيقونة الثانية (icon2) من API
-          title: service.title || "",
-          description: service.description || "",
-          rawDescription: service.description, // حفظ الوصف الأصلي للاستخدام
-        };
-      });
+      // Take only first 8 services
+      const apiItems = servicesData.data
+        .slice(0, 8) // Get first 8 items only
+        .map((service) => {
+          return {
+            id: service.id,
+            image: service.icon, // الأيقونة الأساسية من API
+            image2: service.icon2, // الأيقونة الثانية (icon2) من API
+            title: service.title || "",
+            description: service.description || "",
+            rawDescription: service.description, // حفظ الوصف الأصلي للاستخدام
+          };
+        });
       setItems(apiItems);
     } else {
       setItems([]);
@@ -137,6 +140,9 @@ const Services = ({ homePageData, servicesData }) => {
     return tempDiv.textContent || tempDiv.innerText || "";
   };
 
+  // Check if there are any services to display
+  const hasServices = items.length > 0;
+
   return (
     <div
       ref={sectionRef}
@@ -161,88 +167,96 @@ const Services = ({ homePageData, servicesData }) => {
         />
       </div>
 
-      <div className="mt-[3rem] container2 mx-auto">
-        {rows.map((row, rowIndex) => (
-          <div key={rowIndex} className={getRowAnimationClass(rowIndex)}>
-            <div
-              className={`grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[2rem] ${rowIndex > 0 ? "mt-[2rem]" : ""}`}
-            >
-              {row.map((item, itemIndex) => {
-                const globalIndex = rowIndex * 4 + itemIndex;
-                const isHovered = hoveredIndex === globalIndex;
-                const descriptionText = extractTextFromHTML(item.description);
+      {hasServices ? (
+        <div className="mt-[3rem] container2 mx-auto">
+          {rows.map((row, rowIndex) => (
+            <div key={rowIndex} className={getRowAnimationClass(rowIndex)}>
+              <div
+                className={`grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[2rem] ${rowIndex > 0 ? "mt-[2rem]" : ""}`}
+              >
+                {row.map((item, itemIndex) => {
+                  const globalIndex = rowIndex * 4 + itemIndex;
+                  const isHovered = hoveredIndex === globalIndex;
+                  const descriptionText = extractTextFromHTML(item.description);
 
-                return (
-                  <div
-                    onClick={() =>
-                      navigate(
-                        `/${lang || i18next.language || "ar"}/service/${item.id}`,
-                      )
-                    }
-                    className="rounded-3xl group/card cursor-pointer"
-                    key={`${item.id}-${rowIndex}-${itemIndex}`}
-                    style={{
-                      boxShadow: "0px 0px 8px 0px #00000040",
-                    }}
-                    onMouseEnter={() => handleMouseEnter(rowIndex, itemIndex)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <div className="w-full h-[21rem] pt-[2rem] px-[1.5rem] flex flex-col relative">
-                      {/* الصورة مع تأثير الانتقال */}
-                      <div className="relative w-[4rem] h-[4rem]">
-                        {/* الصورة الأساسية (icon) من API */}
-                        {item.image && (
-                          <img
-                            className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
-                            src={item.image}
-                          />
-                        )}
+                  return (
+                    <div
+                      onClick={() =>
+                        navigate(
+                          `/${lang || i18next.language || "ar"}/service/${item.id}`,
+                        )
+                      }
+                      className="rounded-3xl group/card cursor-pointer"
+                      key={`${item.id}-${rowIndex}-${itemIndex}`}
+                      style={{
+                        boxShadow: "0px 0px 8px 0px #00000040",
+                      }}
+                      onMouseEnter={() => handleMouseEnter(rowIndex, itemIndex)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <div className="w-full h-[21rem] pt-[2rem] px-[1.5rem] flex flex-col relative">
+                        {/* الصورة مع تأثير الانتقال */}
+                        <div className="relative w-[4rem] h-[4rem]">
+                          {/* الصورة الأساسية (icon) من API */}
+                          {item.image && (
+                            <img
+                              className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
+                              src={item.image}
+                            />
+                          )}
 
-                        {/* الصورة الثانية (icon2) من API */}
-                        {item.image2 && (
-                          <img
-                            className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
-                            src={item.image2}
-                          />
-                        )}
+                          {/* الصورة الثانية (icon2) من API */}
+                          {item.image2 && (
+                            <img
+                              className={`w-full h-full object-contain absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
+                              src={item.image2}
+                            />
+                          )}
+                        </div>
+
+                        {/* العنوان */}
+                        <h1
+                          className={`text-primary font-bold text-[1.4rem] mt-[2rem] transition-colors duration-300 ${isHovered ? "text-secondary" : ""}`}
+                        >
+                          {item.title}
+                        </h1>
+
+                        {/* الوصف - استخدام النص المستخرج من HTML */}
+                        <p className="text-[0.9rem] text-[#333333] mt-[0.5rem] leading-[1.5rem] line-clamp-3">
+                          {descriptionText}
+                        </p>
+
+                        {/* الزر مع تغيير اللون عند التمرير على الكارد */}
+                        <button
+                          className={`w-full text-[1.2rem] h-[3.7rem] group/btn absolute bottom-0 right-0 rounded-b-3xl flex items-center justify-center gap-x-2 transition-all duration-300 ${getButtonColor(isHovered)}`}
+                        >
+                          <p className="text-white">{i18next.t("see_more")}</p>
+
+                          {i18next.language === "ar" ? (
+                            <span className="text-white text-[1.4rem] transform transition-transform duration-300 group-hover/btn:-rotate-45">
+                              <GoArrowUpLeft />
+                            </span>
+                          ) : (
+                            <span className="text-white text-[1.2rem] transform transition-transform duration-300 group-hover/btn:rotate-45">
+                              <GoArrowUpRight />
+                            </span>
+                          )}
+                        </button>
                       </div>
-
-                      {/* العنوان */}
-                      <h1
-                        className={`text-primary font-bold text-[1.4rem] mt-[2rem] transition-colors duration-300 ${isHovered ? "text-secondary" : ""}`}
-                      >
-                        {item.title}
-                      </h1>
-
-                      {/* الوصف - استخدام النص المستخرج من HTML */}
-                      <p className="text-[0.9rem] text-[#333333] mt-[0.5rem] leading-[1.5rem] line-clamp-3">
-                        {descriptionText}
-                      </p>
-
-                      {/* الزر مع تغيير اللون عند التمرير على الكارد */}
-                      <button
-                        className={`w-full text-[1.2rem] h-[3.7rem] group/btn absolute bottom-0 right-0 rounded-b-3xl flex items-center justify-center gap-x-2 transition-all duration-300 ${getButtonColor(isHovered)}`}
-                      >
-                        <p className="text-white">{i18next.t("see_more")}</p>
-
-                        {i18next.language === "ar" ? (
-                          <span className="text-white text-[1.4rem] transform transition-transform duration-300 group-hover/btn:-rotate-45">
-                            <GoArrowUpLeft />
-                          </span>
-                        ) : (
-                          <span className="text-white text-[1.2rem] transform transition-transform duration-300 group-hover/btn:rotate-45">
-                            <GoArrowUpRight />
-                          </span>
-                        )}
-                      </button>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-[3rem] text-center">
+          <p className="text-gray-500 text-lg">
+            {i18next.t("no_services_available")}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

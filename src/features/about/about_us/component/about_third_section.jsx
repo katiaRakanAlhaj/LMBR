@@ -15,10 +15,10 @@ const AboutThirdSection = ({ aboutData, solutionData }) => {
                         <div className="lg:w-[8rem] lg:h-[8rem] md:w-[6rem] md:h-[6rem] w-[5rem] h-[5rem] mb-2 bg-primary rounded-full flex justify-center items-center">
                             <img className="lg:w-[4rem] lg:h-[4rem] md:w-[3rem] md:h-[3rem] w-[2rem] h-[2rem] object-contain" src={solutionData.image} />
                         </div>
-                        <h1 className="font-bold text-[1.2rem] text-[#333333] flex text-center">{solutionData.title}</h1>
+                        <h1 className="font-bold text-[1.4rem] text-[#333333] flex text-center">{solutionData.title}</h1>
                         <p dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(solutionData.description)
-                        }} className="text-[#333333] text-center text-[0.9rem] w-[80%]" />
+                        }} className="text-[#333333] text-center text-[1.2rem] w-[80%]" />
                     </div>
                 ))}
             </div>

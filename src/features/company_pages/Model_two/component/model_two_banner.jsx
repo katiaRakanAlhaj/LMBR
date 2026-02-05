@@ -65,7 +65,7 @@ const ModelTwoBanner = ({ singleCompanyData }) => {
             className={`lg:w-1/4 w-1/2 text-white flex flex-col justify-center mt-[-5rem] ${i18n.language == "ar" ? "lg:mr-[-11rem] mr-[-4rem]" : "lg:ml-[-11rem] ml-[-4rem]"}`}
           >
             <p className="font-bold text-[1.2rem] lg:text-[2.3rem] ">
-              {singleCompanyData?.name}
+              {singleCompanyData?.title}
             </p>
             <p
               dangerouslySetInnerHTML={{
