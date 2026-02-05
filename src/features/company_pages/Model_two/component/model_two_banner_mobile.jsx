@@ -16,14 +16,14 @@ const ModelTwoBannerMobile = ({ singleCompanyData }) => {
 
           {/* Text Section */}
           <div className="text-white text-center px-4">
-            <h2 className="font-bold text-xl mb-4">
-              {singleCompanyData?.name}
+            <h2 className="font-bold text-xl">
+              {singleCompanyData?.title}
             </h2>
             <p
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(singleCompanyData?.description),
               }}
-              className="text-base text-md leading-relaxed"
+              className="text-md flex items-center justify-center text-center leading-relaxed"
             />
           </div>
         </div>
