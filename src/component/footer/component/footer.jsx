@@ -8,6 +8,9 @@ const Footer = ({ footerData, contactData, companyData }) => {
   // Helper function to create paths with language prefix
   const createPath = (path) => {
     const currentLang = lang || i18next.language || "ar";
+    if (!path) {
+      return `/${currentLang}`;
+    }
     const cleanPath = path.startsWith("/") ? path.slice(1) : path;
     return `/${currentLang}/${cleanPath}`;
   };
@@ -30,7 +33,7 @@ const Footer = ({ footerData, contactData, companyData }) => {
     { desc: i18next.t("contact_us"), path: createPath("contact") },
   ];
 
-  // Create home path with language
+  // Create home path with language - using createPath("") will return "/en" or "/ar"
   const homePath = createPath("");
 
   return (
@@ -78,19 +81,19 @@ const Footer = ({ footerData, contactData, companyData }) => {
               <Link key={index} to={item.path}>
                 <div className="flex gap-x-2 space-y-4 items-center hover:opacity-80 transition-opacity duration-200">
                   <div className="w-[1.3rem] h-[0.15rem] rounded-full bg-[#099EC8] mt-3"></div>
-                  <p className="text-white text-[1rem]">{item.desc}</p>
-                </div>
-              </Link>
-            ))}
+                      <p className="text-white text-[1rem]">{item.desc}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="w-full h-[0.01rem] mt-[3rem] bg-[#C1C7CD]"></div>
+            <p className="text-[1.1rem] text-white mt-[3rem] flex justify-center items-center">
+              {footerData?.data?.copyright}
+            </p>
           </div>
         </div>
-        <div className="w-full h-[0.01rem] mt-[3rem] bg-[#C1C7CD]"></div>
-        <p className="text-[1.1rem] text-white mt-[3rem] flex justify-center items-center">
-          {footerData?.data?.copyright}
-        </p>
-      </div>
-    </div>
-  );
-};
+      );
+    };
 
 export default Footer;

@@ -194,7 +194,7 @@ const Services = ({ homePageData, servicesData }) => {
                       onMouseEnter={() => handleMouseEnter(rowIndex, itemIndex)}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <div className="w-full h-[21rem] pt-[2rem] px-[1.5rem] flex flex-col relative">
+                      <div className="w-full h-[23rem] pt-[2rem] px-[1.5rem] flex flex-col relative">
                         {/* الصورة مع تأثير الانتقال */}
                         <div className="relative w-[4rem] h-[4rem]">
                           {/* الصورة الأساسية (icon) من API */}
@@ -216,7 +216,7 @@ const Services = ({ homePageData, servicesData }) => {
 
                         {/* العنوان */}
                         <h1
-                          className={`text-primary font-bold text-[1.4rem] mt-[2rem] transition-colors duration-300 ${isHovered ? "text-secondary" : ""}`}
+                          className={`text-primary font-bold text-[1.2rem] mt-[2rem] transition-colors duration-300 ${isHovered ? "text-secondary" : ""}`}
                         >
                           {item.title}
                         </h1>

@@ -23,14 +23,15 @@ const ServicesMenu = forwardRef(({ servicesData, isOpen }, ref) => {
       }}
       className="absolute top-full left-[2rem] right-[2rem] z-50"
     >
-      <div className="grid grid-rows-3 grid-flow-col">
+      {/* Fixed 5 columns grid */}
+      <div className="grid grid-cols-5">
         {servicesData.data.map((service) => (
           <Link
             key={service.id}
             to={createServicePath(service.id)}
             className="border border-white/30 text-white text-[1.1rem]
                        hover:bg-[#263F57] transition-colors
-                       flex items-center justify-center min-h-[4rem] px-4"
+                       flex items-center justify-center min-h-[4.5rem] px-4"
           >
             {service.title}
           </Link>

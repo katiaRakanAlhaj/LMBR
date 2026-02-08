@@ -38,6 +38,9 @@ const NavbarMobile = ({ servicesData, companyData }) => {
   // Helper function to create paths with language prefix
   const createPath = (path) => {
     const currentLang = getCurrentLang();
+    if (!path) {
+      return `/${currentLang}`;
+    }
     const cleanPath = path.startsWith("/") ? path.slice(1) : path;
     return `/${currentLang}/${cleanPath}`;
   };
@@ -161,7 +164,8 @@ const NavbarMobile = ({ servicesData, companyData }) => {
   const handleLogoClick = () => {
     // Only navigate to home if we're NOT on a company page
     if (!isCompanyPage) {
-      navigate(createPath(""));
+      const currentLang = getCurrentLang();
+      navigate(`/${currentLang}`);
       setIsMobileMenuOpen(false);
     }
   };
