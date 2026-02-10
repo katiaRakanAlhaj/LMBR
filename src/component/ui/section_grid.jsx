@@ -40,7 +40,6 @@ const SectionGrid = ({ title, description, image, layout = "grid", reverse = fal
                     <img
                         src={image}
                         className={`w-full ${isColumn ? "lg:h-[24rem] h-[20rem]" : "lg:h-[19rem] h-[20rem]"} object-cover rounded-3xl`}
-                        alt={title || "Section image"}
                     />
                 </div>
             </div>
